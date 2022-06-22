@@ -1,9 +1,9 @@
 // 整理常用的校验规则-扫地盲僧含泪整理转载署名-授权许可证
 /**
- * 是否是中文
+ * @func isChines
  * @param {string} str
  * @returns {boolean}
- * @description 结果为true，则表示是中文
+ * @desc 是否是中文
  */
 export const isChines = (str: string): boolean => {
   const reg = /^[\u4E00-\u9FA5]+$/;
@@ -11,11 +11,11 @@ export const isChines = (str: string): boolean => {
 }
 
 /**
- * 是否为身份证号: 支持（1/2）代，15位或18位
+ * @func isCard
  * @param {string} str 身份证号
  * @param {number} type 1:15位，2:18位，默认0 同时匹配15位和18位
  * @returns {boolean}
- * @description 结果为true，则表示是身份证号
+ * @desc 是否为身份证号: 支持（1/2）代，15位或18位
  */
 export const isIdCard = (str: string, type: number = 0): boolean => {
   // 1代身份证
@@ -36,27 +36,29 @@ export const isIdCard = (str: string, type: number = 0): boolean => {
 };
 
 /**
- * 校验是否是大陆邮政编码
+ * @func isPostCode
  * @param {number} value
  * @returns {boolean}
+ * @desc 校验是否是大陆邮政编码
  */
 export const isPostCode = (value: number): boolean => {
   return /^[1-9][0-9]{5}$/.test(value.toString());
 }
 
 /**
- * 校验是否是IPv6地址
+ * @func isIPv6
  * @param {string} str
  * @returns {boolean}
+ * @desc 校验是否是IPv6地址
  */
 export const isIPv6 = (str: string): boolean => {
   return Boolean(str.match(/:/g) ? str.match(/:/g)!.length <= 7 : false && /::/.test(str) ? /^([\da-f]{1,4}(:|::)){1,6}[\da-f]{1,4}$/i.test(str) : /^([\da-f]{1,4}:){7}[\da-f]{1,4}$/i.test(str));
 }
 /**
- * 是否是邮箱
- * @param {string} str
+ * @func isEmail
+ * @param {string} value
  * @returns {boolean}
- * @description 结果为true，则表示是邮箱
+ * @desc 是否是邮箱
  */
 export const isEmail = (value: string): boolean => {
   const reg =
@@ -65,23 +67,23 @@ export const isEmail = (value: string): boolean => {
 }
 
 /**
- * 是否是手机号
+ * @func isTelNumber
  * @param {string} str
  * @returns {boolean}
- * @description 结果为true，则表示是手机号
+ * @description 是否是手机号
  */
-export const isTel = (str: string): boolean => {
+export const isTelNumber = (str: string): boolean => {
   const reg = /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[189]))\d{8}$/;
   return reg.test(str);
 }
 
 /**
- * 是否包含emoji表情
+ * @func isHasEmoji
  * @param {string} value
  * @returns {boolean}
- * @description 结果为true，则表示是包含emoji表情
+ * @description 是否包含emoji表情
  */
-export const isEmojiCharacter = (value: string): boolean => {
+export const isHasEmoji = (value: string): boolean => {
   value = String(value);
   for (let i = 0; i < value.length; i++) {
     const hs = value.charCodeAt(i);
@@ -118,10 +120,10 @@ export const isEmojiCharacter = (value: string): boolean => {
 }
 
 /**
- * 校验是否是URL 
+ * @func isUrl
  * @param {string} str
  * @returns {boolean}
- * @description 结果为true，则表示是URL
+ * @desc 校验是否是URL
  */
 export const isUrl = (str: string): boolean => {
   const reg = /^(((ht|f)tps?):\/\/)?([^!@#$%^&*?.\s-]([^!@#$%^&*?.\s]{0,63}[^!@#$%^&*?.\s])?\.)+[a-z]{2,6}\/?/;

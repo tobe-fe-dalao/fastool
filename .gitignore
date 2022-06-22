@@ -5,3 +5,4 @@ coverage/
 demo/
 .vscode
 .DS_Store
+.history
