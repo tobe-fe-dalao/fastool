@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es6", // 编译后的es版本
+    "module": "esnext", // 前端模块化规范
+    "allowJs": true, // 允许引入js文件
+    "strict": true, // 开启严格模式
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "declaration": true,
+    "lib": ["ES2015", "DOM", "es5", "es2015.promise", "es2015", "es2017"]
+  },
+  "exclude": ["node_modules/**"],
+  "include": ["src/**/*", "index.ts"]
+}

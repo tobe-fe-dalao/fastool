@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" id="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>这是一个Ts+Rollup的打包模板-盲僧幼儿园出品</title>
+    <script type="module" src="../dist/index.umd.js"></script>
+</head>
+
+<body>
+    <h1 align="center">Hello 我是扫地盲僧!</h1>
+    <p align="center">为了快速开发TS插件，我封装了一个简洁版的TS打包脚手架</p>
+    <button id="set">set参数</button>
+    <button id="get">get参数</button>
+    <button id="clearCookie">清除cookie</button>
+    <button id="scroll">滚动</button>
+    <button id="fullscreen">fullscreen</button>
+    <button id="unfullscreen">unfullscreen</button>
+    <button id="param">param</button>
+    <div style="height:800px"></div>
+</body>
+<script type="text/javascript">
+    window.onload = () => {
+        const { observeProxy, keyCode, getCookie, setCookie, clearCookie,
+            delCookie,
+            smoothScroll,
+            getClientHeight,
+            getClientWidth,
+            toFullScreen,
+            exitFullscreen,
+            paramsJoinUrl,
+            getBaseUrl,
+            getUrlDomain,
+            isSupportCamera,
+            log
+        } = fastool
+        const obj = { name: '爱神的箭卡萨丁', age: 34, lib: { home: 'index' } }
+
+        function handle(val) {
+            console.log(val, '回调函数')
+        }
+        let state = observeProxy(obj, handle)
+        document.getElementById('param').onclick = () => {
+            const newUrl = isSupportCamera()
+            log.error(newUrl)
+        }
+        document.getElementById('set').onclick = () => {
+            state.age = 32
+            console.log(obj, '原数组')
+            console.log(state, '原数组')
+        }
+        document.getElementById('get').onclick = () => {
+            console.log(state.lib.home)
+            delete state.age
+        }
+        document.getElementById('clearCookie').onclick = () => {
+            delCookie('name')
+            // clearCookie()
+            console.log(getCookie(), 'getCookie')
+        }
+        document.getElementById('scroll').onclick = () => {
+            let height = getClientWidth()
+            alert(height)
+        }
+        document.getElementById('fullscreen').onclick = () => {
+            toFullScreen()
+        }
+        document.getElementById('unfullscreen').onclick = () => {
+            exitFullscreen()
+        }
+        keyCode(window, {
+            "Shift+D": () => {
+                alert("The 'Shift' and 'd' keys were pressed at the same time")
+            },
+        })
+        setCookie('name', 'male')
+        console.log(getCookie('name'), '单个')
+        console.log(getCookie(), 'getCookie')
+
+
+    }
+</script>
+<style>
+    body {
+        background: rgb(15 23 42);
+        color: #fff;
+    }
+</style>
+
+</html>
