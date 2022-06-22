@@ -1,21 +1,4 @@
 /**
- * 设计一个对象的观测者
- * @param { Object } obj 对象
- * @param { String } key 对象的key
- * @return { Object } 返回一个可观测对象
- * @example  let obj = observerDef({name:'alex',age:18})
-*/
-export const observeDef = (obj: Object): Object | undefined => {
-  if (!obj || typeof obj !== 'object') {
-    return
-  }
-  let keys = Object.keys(obj)
-  keys.forEach(key => {
-    defineReactive(obj, key, obj[key])
-  })
-  return obj
-}
-/**
  * 使一个对象转化成可观测对象
  * @param { Object } obj 对象
  * @param { String } key 对象的key
@@ -35,6 +18,24 @@ const defineReactive = (obj: Object, key: string, val: any): void => {
     }
   })
 }
+/**
+ * 设计一个对象的观测者
+ * @param { Object } obj 对象
+ * @param { String } key 对象的key
+ * @return { Object } 返回一个可观测对象
+ * @example  let obj = observerDef({name:'alex',age:18})
+*/
+export const observeDef = (obj: Object): Object | undefined => {
+  if (!obj || typeof obj !== 'object') {
+    return
+  }
+  let keys = Object.keys(obj)
+  keys.forEach(key => {
+    defineReactive(obj, key, obj[key])
+  })
+  return obj
+}
+
 /**
  * 设计一个对象的观测者-proxy方案
  * @param { Object } obj 对象

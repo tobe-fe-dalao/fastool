@@ -34,6 +34,7 @@
             getBaseUrl,
             getUrlDomain,
             isSupportCamera,
+            getDistance,
             log
         } = fastool
         const obj = { name: '爱神的箭卡萨丁', age: 34, lib: { home: 'index' } }
@@ -43,7 +44,7 @@
         }
         let state = observeProxy(obj, handle)
         document.getElementById('param').onclick = () => {
-            const newUrl = isSupportCamera()
+            const newUrl = getDistance({ x: 1, y: 2 }, { x: 3, y: 4 })
             log.error(newUrl)
         }
         document.getElementById('set').onclick = () => {

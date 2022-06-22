@@ -8,25 +8,27 @@ const isObj = (obj: any): boolean => {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 /**
- * 深拷贝合并对象
- * @param _props 外部的参数对象
- * @param _defaults 默认参数对象
+ * @func mergeObject
+ * @param {object} obj1 外部的参数对象
+ * @param {object} obj2 默认参数对象
+ * @desc 深拷贝合并对象
  * @returns {Object}
+ * @example mergeObject(obj1, obj2)
  */
-export const mergeObject = (_props: any, _defaults: Object): Object => {
+export const mergeObject = (obj1: any, obj2: Object): Object => {
   // 如果没有传参，返回默认值
-  if (!isObj(_props)) {
-    return mergeObject({}, _defaults);
+  if (!isObj(obj1)) {
+    return mergeObject({}, obj2);
   }
   // 如果没有默认，返回传参
-  if (!isObj(_defaults)) {
-    return mergeObject({}, _props);
+  if (!isObj(obj2)) {
+    return mergeObject({}, obj1);
   }
   // 定义一个以默认值为基础的新对象
-  let newObj = Object.assign({}, _defaults)
+  let newObj = Object.assign({}, obj2)
   // 遍历传参对象
-  Object.keys(_props).forEach(function (key) {
-    let val = _props[key]
+  Object.keys(obj1).forEach(function (key) {
+    let val = obj1[key]
     if (key === '__proto__' || key === 'constructor') {
       return
     }
