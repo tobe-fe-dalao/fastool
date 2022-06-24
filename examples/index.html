@@ -10,20 +10,22 @@
 </head>
 
 <body>
-    <h1 align="center">Hello 我是扫地盲僧!</h1>
-    <p align="center">为了快速开发TS插件，我封装了一个简洁版的TS打包脚手架</p>
-    <button id="set">set参数</button>
-    <button id="get">get参数</button>
-    <button id="clearCookie">清除cookie</button>
-    <button id="scroll">滚动</button>
-    <button id="fullscreen">fullscreen</button>
-    <button id="unfullscreen">unfullscreen</button>
-    <button id="param">param</button>
-    <div style="height:800px"></div>
+    <div id="app">
+        <h1 align="center">Hello 我是扫地盲僧!</h1>
+        <p align="center">为了快速开发TS插件，我封装了一个简洁版的TS打包脚手架</p>
+        <button id="set">set参数</button>
+        <button id="get">get参数</button>
+        <button id="clearCookie">清除cookie</button>
+        <button id="scroll">滚动</button>
+        <button id="fullscreen">fullscreen</button>
+        <button id="unfullscreen">unfullscreen</button>
+        <button id="param">param</button>
+        <div style="height:800px"></div>
+    </div>
 </body>
 <script type="text/javascript">
     window.onload = () => {
-        const { observeProxy, keyCode, getCookie, setCookie, clearCookie,
+        const { observeProxy, getCookie, setCookie, clearCookie,
             delCookie,
             smoothScroll,
             getClientHeight,
@@ -35,6 +37,9 @@
             getUrlDomain,
             isSupportCamera,
             getDistance,
+            Print,
+            keyCode,
+            start,
             log
         } = fastool
         const obj = { name: '爱神的箭卡萨丁', age: 34, lib: { home: 'index' } }
@@ -44,8 +49,9 @@
         }
         let state = observeProxy(obj, handle)
         document.getElementById('param').onclick = () => {
-            const newUrl = getDistance({ x: 1, y: 2 }, { x: 3, y: 4 })
-            log.error(newUrl)
+            keyCode().then((res) => {
+               console.log(res)
+            })
         }
         document.getElementById('set').onclick = () => {
             state.age = 32
@@ -71,11 +77,6 @@
         document.getElementById('unfullscreen').onclick = () => {
             exitFullscreen()
         }
-        keyCode(window, {
-            "Shift+D": () => {
-                alert("The 'Shift' and 'd' keys were pressed at the same time")
-            },
-        })
         setCookie('name', 'male')
         console.log(getCookie('name'), '单个')
         console.log(getCookie(), 'getCookie')

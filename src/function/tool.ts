@@ -30,9 +30,9 @@ export const throttle = (fn: Function, wait: number = 300): Function => {
  * @example debounce(fn, wait)
  * 
  */
-export const debounce = (fn: Function, wait: number, immediate: boolean = false) => {
+export function debounce(fn: Function, wait: number, immediate: boolean = false) {
   let timer: any = null;
-  return (...args: any) => {
+  return function (this: unknown, ...args: any) {
     if (timer) {
       clearTimeout(timer);
       timer = null;
@@ -144,3 +144,42 @@ export const getTypeOf = (param: unknown): string => {
  * @desc 睡眠函数
  */
 export const sleep = async (wait: number) => new Promise(resolve => setTimeout(resolve, wait));
+
+/**
+ * @func importPluginByUrl
+ * @desc 根据url引入插件模块
+ * @param {String} cdnUrl
+ * @param {String} pluginName  该插件对应的名称
+ * @param {String} newName  重新定义的名称
+ * @returns {Promise}
+ * @example importPluginByUrl(cdnUrl, pluginName)
+ */
+export function importPluginByUrl<T = any>(cdnUrl: string, pluginName: string, newName: string): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const scriptList = Array.from(document.getElementsByTagName('script'))
+    const hasInject = window[pluginName] && scriptList.some(script => script.getAttribute('src') === cdnUrl)
+    if (hasInject) {
+      window[newName] = window[pluginName];
+      return resolve(window[pluginName]?.default ?? window[pluginName]);
+    }
+    const script = document.createElement('script')
+    script.setAttribute('src', cdnUrl)
+    script.setAttribute('async', 'async')
+    script.setAttribute('type', 'module')
+    document.head.appendChild(script)
+    script.onload = () => {
+      window[newName] = window[pluginName];
+      resolve(window[pluginName]?.default ?? window[pluginName]);
+    }
+    script.onerror = () => {
+      reject(`加载${pluginName}失败`)
+    }
+    //若不支持ESM   或者polyfill方案：https://github.com/systemjs/systemjs
+    // import('https://unpkg.com/tinykeys@latest/dist/tinykeys.module.js' as any)
+    //   .then((module) => {
+    //     window[newName] = module
+    //     console.log(module)
+    //     resolve(module)
+    //   });
+  })
+}

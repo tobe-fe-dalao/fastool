@@ -25,12 +25,10 @@ import del from 'rollup-plugin-delete';
 import pkg from './package.json';
 // 判断是是否为生产环境
 // 开发环境or生产环境
-const NODE_ENV = process.env.NODE_ENV;
 const isPro = function () {
-  return NODE_ENV === 'production';
+  return process.env.NODE_ENV === 'production';
 };
-// console.log(process.env, '环境判断');
-const extensions = ['.js', '.jsx', '.ts', '.tsx', '.less'];
+const extensions = ['.jsx', '.ts', '.tsx', '.less'];
 export default [
   {
     input: path.resolve('./index.ts'),
@@ -64,14 +62,14 @@ export default [
       }),
       babel({
         runtimeHelpers: true,
-        exclude: 'node_modules/**',
+        exclude: ['node_modules/**', 'src/plugins/**.js'],
       }),
       !isPro() &&
         livereload({
           watch: ['dist', 'examples', 'src/**/*'],
           verbose: false,
         }),
-      !isPro() && terser(),
+      isPro() && terser(),
       !isPro() &&
         serve({
           open: false,

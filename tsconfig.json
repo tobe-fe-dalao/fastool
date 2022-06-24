@@ -13,7 +13,7 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "declaration": true,
-    "lib": ["ES2015", "DOM", "es5", "es2015.promise", "es2015", "es2017"]
+    "lib": ["ES2015", "DOM", "es5", "es2015.promise", "es2015", "es2017", "esnext"]
   },
   "exclude": ["node_modules/**"],
   "include": ["src/**/*", "index.ts"]
