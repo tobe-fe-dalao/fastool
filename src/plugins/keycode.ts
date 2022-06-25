@@ -15,16 +15,11 @@ interface ITinyKey {
   parseKeybinding: (keyName: string) => Array<any>
 }
 const keyCode = async () => {
-  import('https://unpkg.com/tinykeys@latest/dist/tinykeys.module.js' as any)
-    .then((module) => {
-      window['kkk'] =
-      console.log(module)
-    });
-  // const module = await importPluginByUrl<ITinyKey>(
-  //   'https://unpkg.com/tinykeys@latest',
-  //   'tinykeys'
-  // )
-  // return module
+  return await importPluginByUrl<ITinyKey>(
+    'https://unpkg.com/tinykeys@latest/dist/tinykeys.module.js',
+    'tinykeys',
+    'keyCode'
+  )
 }
 export default keyCode
 

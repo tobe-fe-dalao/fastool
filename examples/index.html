@@ -40,6 +40,7 @@
             Print,
             keyCode,
             start,
+            dayJs,
             log
         } = fastool
         const obj = { name: '爱神的箭卡萨丁', age: 34, lib: { home: 'index' } }
@@ -49,9 +50,7 @@
         }
         let state = observeProxy(obj, handle)
         document.getElementById('param').onclick = () => {
-            keyCode().then((res) => {
-               console.log(res)
-            })
+            console.log(dayJs())
         }
         document.getElementById('set').onclick = () => {
             state.age = 32
