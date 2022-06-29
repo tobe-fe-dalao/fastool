@@ -1,8 +1,4 @@
-//异步加载专业dayjs日期库
-export const dayjs = () => {
-  const _dayjs = import('https://unpkg.com/dayjs@1.8.21/dayjs.min.js' as any).then(dayjs => dayjs().format());
-  return _dayjs
-}
+
 /**
  * @func diffDays
  * @desc 📝比较两个日期相差的天数
@@ -18,11 +14,12 @@ export function diffDays(date1: Date, date2: Date): number {
 }
 
 /**
- * @func nowTime
+ * @func getNowTime
  * @desc 📝获取当前时间
  * @returns {Date}
+ * @example getNowTime()
  */
-export const nowTime = () => {
+export const getNowTime = () => {
   const now = new Date();
   const year = now.getFullYear();
   const month = now.getMonth();
@@ -51,6 +48,7 @@ export const formatDate = (format: string, time?: Date) => {
     .replace(/ss/g, (s < 10 ? '0' : '') + s)
 }
 /**
+ * @func formatPassTime
  * @desc   格式化${startTime}距现在的已过时间
  * @param  {Date} startTime  时间戳
  * @return {String}
@@ -75,7 +73,7 @@ export const formatPassTime = (startTime?: Date) => {
 }
 
 /**
- * 
+ * @func formatRemainTime
  * @desc   格式化现在距${endTime}的剩余时间
  * @param  {Date} endTime  
  * @return {String}
@@ -97,10 +95,11 @@ export const formatRemainTime = (endTime: Date) => {
   return d + "天 " + h + "小时 " + m + "分钟 " + s + "秒";
 }
 /**
- * 
+ * @func isLeapYear
  * @desc 是否为闰年
  * @param {Number} year
  * @returns {Boolean}
+ * @example isLeapYear(2020)
  */
 
 export const isLeapYear = (year: number) => {
@@ -110,11 +109,12 @@ export const isLeapYear = (year: number) => {
   return false;
 }
 /** 
+ * @func getDaysByMonth
  * @desc 获取指定日期月份的总天数
  * @param {Date} time
  * @return {Number}
 */
-export const monthDays = (time: Date) => {
+export const getDaysByMonth = (time: Date) => {
   time = new Date(time);
   let year = time.getFullYear();
   let month = time.getMonth() + 1;
@@ -122,6 +122,7 @@ export const monthDays = (time: Date) => {
 }
 
 /**
+ * @func timeLeft
  * @desc ${startTime - endTime}的剩余时间,startTime大于endTime时，均返回0
  * @param { Date | String } startTime
  * @param { Date | String } endTime
