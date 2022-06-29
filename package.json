@@ -16,7 +16,7 @@
     "bugs": "https://github.com/MaleWeb/fastool/issues",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/MaleWeb/fastool.git",
+        "url": "git+https://github.com/MaleWeb/fastool.git"
     },
     "author": "BlindMonk",
     "license": "Apache-2.0",
