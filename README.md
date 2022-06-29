@@ -55,7 +55,7 @@ pnpm add fastool
 ```bash
 // CDN源：jsdelivr
 
-https://cdn.jsdelivr.net/npm/
+https://cdn.jsdelivr.net/npm/fastool@latest
 
 CDN源：unpkg
 ```
