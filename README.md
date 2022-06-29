@@ -58,6 +58,8 @@ pnpm add fastool
 https://cdn.jsdelivr.net/npm/fastool@latest
 
 CDN源：unpkg
+
+https://unpkg.com/fastool@latest
 ```
 
 ## **Authors**
