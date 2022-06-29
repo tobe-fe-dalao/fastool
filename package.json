@@ -1,7 +1,7 @@
 {
-    "name": "@femate/fastool",
+    "name": "fastool",
     "version": "0.0.1",
-    "description": "一个现代化，高效率的JavaScript工具库",
+    "description": "一个短小而精悍的现代JavaScript使用工具库",
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.js",
     "unpkg": "dist/index.umd.js",
@@ -13,11 +13,10 @@
         "build": "rimraf dist && cross-env NODE_ENV=production rollup -c"
     },
     "homepage": "",
-    "bugs": "https://github.com/tobe-fe-dalao/femate/issues",
+    "bugs": "https://github.com/MaleWeb/fastool/issues",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/tobe-fe-dalao/femate.git",
-        "directory": "packages/grid-picture"
+        "url": "git+https://github.com/MaleWeb/fastool.git",
     },
     "author": "BlindMonk",
     "license": "Apache-2.0",
@@ -42,10 +41,8 @@
         "@typescript-eslint/parser": "^4.14.0",
         "babel-plugin-external-helpers": "^6.22.0",
         "babel-preset-latest": "^6.24.1",
-        "core-js": "^3.19.2",
         "eslint": "^7.18.0",
         "eslint-plugin-prettier": "^3.3.1",
-        "less": "^4.1.2",
         "prettier": "^2.2.1",
         "rollup": "^2.33.1",
         "rollup-plugin-babel": "^4.4.0",
@@ -62,8 +59,6 @@
     "dependencies": {
         "@types/node": "^17.0.31",
         "cross-env": "^7.0.3",
-        "nanoid": "^4.0.0",
-        "rollup-plugin-uglify": "^6.0.4",
-        "tinykeys": "^1.4.0"
+        "rollup-plugin-uglify": "^6.0.4"
     }
 }
