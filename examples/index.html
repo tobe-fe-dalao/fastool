@@ -20,6 +20,9 @@
         <button id="fullscreen">fullscreen</button>
         <button id="unfullscreen">unfullscreen</button>
         <button id="param">param</button>
+        <button id="myCanvas">canvas生成图片</button>
+        <canvas width="600" height="400" id="cvs"></canvas>
+
         <div style="height:800px"></div>
         <img src="./logo.svg" />
     </div>
@@ -42,7 +45,8 @@
             keyCode,
             start,
             dayJs,
-            log
+            log,
+            canvas2image
         } = fastool
         const obj = { name: '爱神的箭卡萨丁', age: 34, lib: { home: 'index' } }
 
@@ -80,14 +84,34 @@
         setCookie('name', 'male')
         console.log(getCookie('name'), '单个')
         console.log(getCookie(), 'getCookie')
-
-
+        // canvas调用
+        document.getElementById('myCanvas').onclick = () => {
+           canvas2image().saveAsImage(canvas,600,400)
+        }
+        let canvas, ctx, bMouseIsDown = false, iLastX, iLastY
+        (function init () {
+            console.log('init')
+            canvas = document.getElementById('cvs');
+            ctx = canvas.getContext('2d');
+            draw();
+        })()
+       
+        function draw () {
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, 600, 400);
+            ctx.fillStyle = 'red';
+            ctx.fillRect(100, 100, 50, 50);
+        }
     }
 </script>
 <style>
     body {
         background: rgb(15 23 42);
         color: #fff;
+    }
+    canvas {
+        display: block;
+        border: 2px solid #888;
     }
 </style>
 

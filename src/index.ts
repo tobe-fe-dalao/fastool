@@ -12,3 +12,4 @@ export * from './random';
 export * from './tools';
 export * from './plugins'
 export * from './log';
+export * from './canvas';
