@@ -47,11 +47,32 @@
         const obj = { name: '爱神的箭卡萨丁', age: 34, lib: { home: 'index' } }
 
         function handle(val) {
+
             console.log(val, '回调函数')
         }
         let state = observeProxy(obj, handle)
         document.getElementById('param').onclick = () => {
-            console.log(dayJs())
+            // dayJs示例
+            dayJs().then((module) => {
+                let day = dayjs().format()
+                console.log('dayJs', module, day)
+            })
+            // tinykeys示例
+            keyCode().then(module => {
+                let handler = window.tinykeys.createKeybindingsHandler({
+                    "Shift+D": () => {
+                        alert("The 'Shift' and 'd' keys were pressed at the same time")
+                    },
+                    "y e e t": () => {
+                        alert("The keys 'y', 'e', 'e', and 't' were pressed in order")
+                    },
+                    "$mod+KeyD": event => {
+                        event.preventDefault()
+                        alert("Either 'Control+d' or 'Meta+d' were pressed")
+                    },
+                })
+                window.addEventListener("keydown", handler)
+            })
         }
         document.getElementById('set').onclick = () => {
             state.age = 32
@@ -80,8 +101,6 @@
         setCookie('name', 'male')
         console.log(getCookie('name'), '单个')
         console.log(getCookie(), 'getCookie')
-
-
     }
 </script>
 <style>

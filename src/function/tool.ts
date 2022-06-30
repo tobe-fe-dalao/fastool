@@ -20,7 +20,7 @@ export const throttle = (fn: Function, wait: number = 300): Function => {
 
 /**
  * @func debounce
- * @desc 防抖函数 
+ * @desc 防抖函数
  * 与throttle不同的是，debounce保证一个函数在多少毫秒内不再被触发，只会执行一次，
  * 要么在第一次调用return的防抖函数时执行，要么在延迟指定毫秒后调用。
  * @param {function} fn 将要处理的函数
@@ -28,7 +28,7 @@ export const throttle = (fn: Function, wait: number = 300): Function => {
  * @param immediate 是否在触发事件后 在时间段n开始，立即执行，否则是时间段n结束，才执行
  * @returns 包装好的节流函数
  * @example debounce(fn, wait)
- * 
+ *
  */
 export function debounce(fn: Function, wait: number, immediate: boolean = false) {
   let timer: any = null;
@@ -39,8 +39,8 @@ export function debounce(fn: Function, wait: number, immediate: boolean = false)
     }
     if (immediate) {
       if (!timer) fn.apply(this, args);
-      timer = setTimeout(function () {//n 秒内 多次触发事件,重新计算.timeer 
-        timer = null;//n 秒内没有触发事件 timeer 设置为null，保证了n 秒后能重新触发事件 flag = true = !timmer  
+      timer = setTimeout(function () {//n 秒内 多次触发事件,重新计算.timeer
+        timer = null;//n 秒内没有触发事件 timeer 设置为null，保证了n 秒后能重新触发事件 flag = true = !timmer
       }, wait)
     } else {
       timer = setTimeout(() => { fn.apply(this, args) }, wait);
@@ -49,7 +49,7 @@ export function debounce(fn: Function, wait: number, immediate: boolean = false)
 }
 
 /**
- * @func deepClone 
+ * @func deepClone
  * @param {object} obj 将要复制的对象
  * @param {string} hash  哈希值
  * @returns {object} 复制后的对象
@@ -61,7 +61,7 @@ export const deepClone = (obj: object, hash: any = new WeakMap()): object => {
   if (obj instanceof Date) {
     return new Date(obj);
   }
-  //正则对象直接返回一个新的正则对象     
+  //正则对象直接返回一个新的正则对象
   if (obj instanceof RegExp) {
     return new RegExp(obj);
   }
@@ -157,12 +157,15 @@ export const sleep = async (wait: number) => new Promise(resolve => setTimeout(r
  */
 export function importPluginByUrl<T = any>(cdnUrl: string, pluginName: string, newName: string, isEsm: boolean = true): Promise<T> | void {
   if (isEsm) {
-    // TOD若不支持ESM   或者polyfill方案：https://github.com/systemjs/systemjs
-    import(cdnUrl as any)
-      .then((module) => {
-        window[newName] = module
-        console.log(module)
-      });
+    // 若不支持ESM   或者polyfill方案：https://github.com/systemjs/systemjs
+    return new Promise((resolve, reject) => {
+      import(<string>cdnUrl)
+        .then((module) => {
+          resolve(window[newName] = module)
+        }).catch(() => {
+          reject(`加载${pluginName}失败`)
+        });
+    })
   } else {
     return new Promise((resolve, reject) => {
       const scriptList = Array.from(document.getElementsByTagName('script'))
