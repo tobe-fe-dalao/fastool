@@ -25,4 +25,25 @@ function getFileName() {
     + date.getHours() + date.getMinutes() + (date.getSeconds() < 10 ? '0' : '') + date.getSeconds();
   return fileName;
 }
+export const dataURLtoBlob = (dataurl: string): Blob | null => {
+  let mime;
+  let u8arr;
+  if (dataurl) {
+    const arr = dataurl.split(',');
+    if (arr && arr.length) {
+      const mimem = arr[0].match(/:(.*?);/);
+      if (mimem) {
+        mime = mimem[1] || 'image/png';
+      }
+      const bstr = atob(arr[1]);
+      let n = bstr.length;
+      u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new Blob([ u8arr ], { type: mime });
+    }
+  }
+  return null;
+};
 
