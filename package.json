@@ -1,6 +1,6 @@
 {
-  "name": "fastool",
-  "version": "1.0.0",
+  "name": "fastool-doc",
+  "version": "1.0.1",
   "main": "index.js",
   "repository": "https://github.com/tobe-fe-dalao/fastool.git",
   "author": "院长",
