@@ -2,7 +2,7 @@
 module.exports = {
   lang: 'en-US',
   title: 'FasTool',
-  base: './',
+  base: '/fastool/',
   description: '一个短小而精悍的现代JavaScript使用工具库',
   lastUpdated: true,
   head: [
