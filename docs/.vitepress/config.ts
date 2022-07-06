@@ -15,7 +15,7 @@ module.exports = {
       '/guide/': sidebarGuide()
     },
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/tobe-fe-dalao/fastool/' }
+      { icon: 'github', link: 'https://github.com/tobe-fe-dalao/fastool' }
     ],
     editLink: {
       pattern: 'https://github.com/tobe-fe-dalao/fastool/tree/doc/docs/:path',
@@ -46,7 +46,9 @@ function nav() {
 function sidebarGuide() {
   return [
     {
-      text: '介绍', items: [
+      text: '介绍',
+      collapsible: true,
+      items: [
         { text: '介绍', link: '/guide/' },
         { text: '快速上手', link: '/guide/start' },
         { text: '参与编辑', link: '/guide/EditMd' },
@@ -54,7 +56,9 @@ function sidebarGuide() {
       ]
     },
     {
-      text: '本地存储', items: [
+      text: '本地存储',
+      collapsible: true,
+      items: [
         { text: 'Storage操作', link: '/guide/Storage' },
         { text: 'Cookie操作', link: '/guide/Cookie' },
       ]
