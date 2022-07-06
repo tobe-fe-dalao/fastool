@@ -2,8 +2,8 @@
   "name": "fastool",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/MaleWeb/fastool.git",
-  "author": "bindmonk <934951243@qq.com>",
+  "repository": "https://github.com/tobe-fe-dalao/fastool.git",
+  "author": "院长",
   "license": "MIT",
   "scripts": {
     "docs:dev": "vitepress dev docs",

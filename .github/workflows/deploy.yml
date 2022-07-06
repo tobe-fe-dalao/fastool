@@ -27,7 +27,7 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3 # 使用部署到 GitHub pages 的 action
         with:
-          publish_dir: ./docs/.vitepress/dist # 部署打包后的 dist 目录
+          publish_dir: ./docs/.vitepress/dist/ # 部署打包后的 dist 目录
           github_token: ${{ secrets.DESIGN_SECRET }} # secret 名
           user_name: ${{ secrets.MY_USER_NAME }}
           user_email: ${{ secrets.MY_USER_EMAIL }}
