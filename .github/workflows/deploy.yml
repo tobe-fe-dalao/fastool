@@ -17,7 +17,7 @@ jobs:
 
       # 打包构建
       - name: Build
-        uses: actions/setup-node@gh-pages
+        uses: actions/setup-node@master
         with:
           node-version: "16.x"
       - run: yarn install # 安装依赖
