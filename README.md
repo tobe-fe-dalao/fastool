@@ -31,7 +31,7 @@
 - ✅包含动态插件库，可以随时调用，做随手可得且最全的工具库
 - ✅更多能力等你挖掘....
 
-如果您觉得这个项目还不错, 可以在 [Github](https://github.com/MaleWeb/fastool) 上面帮我点个`star`, 支持一下作者 ☜(ﾟヮﾟ☜)
+如果您觉得这个项目还不错, 可以在 [Github](https://github.com/tobe-fe-dalao/fastool) 上面帮我点个`star`, 支持一下作者 ☜(ﾟヮﾟ☜)
 # 如何使用
 
 ## import
@@ -66,14 +66,14 @@ https://unpkg.com/fastool@latest
 
 这个项目需要感谢的参与者
 <div align="left">
-  <a href="https://github.com/MaleWeb/fastool/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=MaleWeb/fastool" />
+  <a href="https://github.com/tobe-fe-dalao/fastool/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=tobe-fe-dalao/fastool" />
   </a>
 </div>
 
 # About Me  
 
-<img width="460px" src="https://cdn.jsdelivr.net/gh/MaleWeb/picture/images/techblog/book-slogan.gif" />
+<img width="460px" src="https://cdn.jsdelivr.net/gh/tobe-fe-dalao/picture/images/techblog/book-slogan.gif" />
 
  <img src="https://uufefile.uupt.com/eic/male/github/wechat.jpg" width="220" />  
 
@@ -83,5 +83,5 @@ https://unpkg.com/fastool@latest
 [Milestones](https://github.com/tobe-fe-dalao/femate/projects)  
 
 # License
- [Apache-2.0](./LICENSE) © [MaleWeb](https://github.com/MaleWeb)
+ [Apache-2.0](./LICENSE) © [tobe-fe-dalao](https://github.com/tobe-fe-dalao)
 

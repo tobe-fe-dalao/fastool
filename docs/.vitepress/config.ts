@@ -16,7 +16,7 @@ module.exports = {
     },
     smoothScroll: true,
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/MaleWeb' }
+      { icon: 'github', link: 'https://github.com/tobe-fe-dalao' }
     ],
 
   }
@@ -25,9 +25,9 @@ module.exports = {
 
 function nav() {
   return [
-    { text: '我的个人网站', link: 'http://www.maleweb.cn' },
+    { text: '我的个人网站', link: 'http://www.tobe-fe-dalao.cn' },
     { text: '掘金', link: 'https://juejin.cn/user/3016715636842622' },
-    { text: '加入我们', link: 'https://github.com/MaleWeb/fastool' },
+    { text: '加入我们', link: 'https://github.com/tobe-fe-dalao/fastool' },
 
   ]
 }

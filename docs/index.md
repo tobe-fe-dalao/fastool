@@ -13,7 +13,7 @@ hero:
       link: /guide/Storage
     - theme: alt
       text: View on GitHub
-      link: https://github.com/MaleWeb/fastool
+      link: https://github.com/tobe-fe-dalao/fastool
 
 features:
   - title: TS
