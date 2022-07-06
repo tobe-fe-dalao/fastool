@@ -1,0 +1,18 @@
+:root {
+  --vp-c-brand        : #7828C8;
+  --vp-c-green        : #7828C8;
+  --vp-c-green-light  : #571D91;
+  --vp-c-green-lighter: #571D91;
+  --vp-c-green-dark   : #571D91;
+  --vp-c-green-darker : #571D91;
+}
+
+.dark {
+  --vp-c-bg         : #000;
+  --vp-code-block-bg: #111;
+  --vp-c-bg-alt     : rgba(0, 0, 0, 0.5)
+}
+
+.dark .VPNavBar.has-sidebar .content[data-v-5989c3b2] {
+  background: rgba(36, 36, 36, 0.1);
+}
