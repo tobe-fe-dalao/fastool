@@ -1,8 +1,8 @@
-name: deploy
+name: Deployment
 
 on:
   push:
-    branches: [gh-pages] # master 分支有 push 时触发
+    branches: [doc] # master 分支有 push 时触发
     paths-ignore: # 下列文件的变更不触发部署，可以自行添加
       - README.md
 
