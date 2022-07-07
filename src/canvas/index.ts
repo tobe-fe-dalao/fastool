@@ -1,18 +1,17 @@
 /**
- * 判断浏览器是否支持webP格式图片
- * @export {function} isSupportWebP
- * @returns {boolean} 是否支持
+ * @func isSupportWebP
+ * @returns {boolean}
+ * @desc 判断浏览器是否支持webP格式图片
  */
 export function isSupportWebP() {
   return !![].map && document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') == 0;
 }
 
 /**
- * 获取图片base64Url
- * @description 获取图片的base64 url
- * @export {function} getImageBase64Url
+ * @func getImageBase64Url
  * @param {HTMLImageElement} image
- * @returns {string} base64 url
+ * @returns {string}
+ * @desc 获取图片base64Url
  */
 export function getImageBase64Url(image: HTMLImageElement): string {
   const canvas = document.createElement('canvas');
@@ -25,11 +24,10 @@ export function getImageBase64Url(image: HTMLImageElement): string {
 }
 
 /**
- * 将颜色转rgba
- * @description 将颜色色值转rgba
- * @export {function} changeColorToRGBA
- * @param {string} color - 颜色色值
- * @returns {object} - rgba值
+ * @func changeColorToRGBA
+ * @param {string} color
+ * @returns {object}
+ * @desc 将颜色色值转rgba
  */
 export function changeColorToRGBA(color: string) {
   let canvas = (window as any).canvas;
