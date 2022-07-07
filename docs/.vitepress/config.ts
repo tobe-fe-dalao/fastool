@@ -1,4 +1,3 @@
-
 module.exports = {
   lang: 'zh-CN',
   title: 'FasTool',
@@ -74,6 +73,14 @@ function sidebarGuide() {
     // { text: 'Number操作', link: '/guide/Number' },
     // { text: 'Media操作', link: '/guide/Media' },
     // { text: 'Polyfill兼容', link: '/guide/Polyfill' },
+    {
+      text: 'Polyfill兼容',
+      collapsible: true,
+      items: [
+        { text: 'array相关', link: '/guide/Polyfill/array' },
+        { text: 'string相关', link: '/guide/Polyfill/string' },
+      ]
+    },
     // { text: 'Canvas操作', link: '/guide/Canvas' },
     // { text: 'Event事件', link: '/guide/Event' },
     // { text: 'Plugins插件库', link: '/guide/Plugins' },
