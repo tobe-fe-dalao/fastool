@@ -31,4 +31,4 @@ jobs:
           github_token: ${{ secrets.DESIGN_SECRET }} # secret 名
           user_name: ${{ secrets.MY_USER_NAME }}
           user_email: ${{ secrets.MY_USER_EMAIL }}
-          commit_message: 触发github自动构建流水线，地址：https://tobe-fe-dalao.github.io/fastool # 部署时的 git 提交信息，自由填写
+          commit_message: 自动部署流水线：https://tobe-fe-dalao.github.io/fastool # 部署时的 git 提交信息，自由填写
