@@ -90,6 +90,19 @@ export const base64toBlob = (base64: string): Blob | null => {
 export const blobtoFile = (blob: Blob, fileName: string = getFileName()): any => {
   return new File([blob], fileName, { type: blob.type })
 };
-export const filetoBase64 = (file: any): string => {
-  return 'aasd'
+/**
+ * @func filetoBase64
+ * @param file 文件对象
+ * @desc 文件对象转base64
+ * @return { Promise } Promise对象，异步处理
+ */
+export const filetoBase64 = (file: any): Promise<any> => {
+  // return window.URL.createObjectURL(file)
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = (event) => {
+      resolve(event!.target.result)
+    }
+  })
 }
