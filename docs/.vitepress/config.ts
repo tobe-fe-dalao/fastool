@@ -73,11 +73,36 @@ function sidebarGuide() {
     // { text: 'Browser浏览器', link: '/guide/Browser' },
     // { text: 'Number操作', link: '/guide/Number' },
     // { text: 'Media操作', link: '/guide/Media' },
-    // { text: 'Polyfill兼容', link: '/guide/Polyfill' },
+    {
+      text: 'Polyfill兼容',
+      collapsible: true,
+      items: [
+        { text: 'Array', link: '/guide/Polyfill/Array' },
+        { text: 'String', link: '/guide/Polyfill/String' },
+      ]
+    },
     // { text: 'Canvas操作', link: '/guide/Canvas' },
     // { text: 'Event事件', link: '/guide/Event' },
-    // { text: 'Plugins插件库', link: '/guide/Plugins' },
+    {
+      text: 'Plugins插件库',
+      collapsible: true,
+      items: [
+        { text: 'Plugins插件库', link: '/guide/Plugins/' },
+
+      ]
+    },
     // { text: 'Tools工具库', link: '/guide/Tools' },
   ]
 }
 
+
+
+/**
+ * @func 函数名称
+ * @desc 函数描述
+ * @param {number} 参数类型
+ * @return {void} 返回值类型
+ * @github  github地址
+ * @example 实例(多行换行)
+ * @size (插件大小)
+ */
