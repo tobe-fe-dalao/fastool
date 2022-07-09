@@ -3,6 +3,7 @@
  * @param {string} dataUrl
  * @param {string} fileName
  * @desc  将dataUrl转换为文件
+ * ie无法使用new File构造函数，建议使用dataURLtoBlob
  * @return {any} 文件对象
  * @example let file = dataURLtoFile(dataUrl, fileName)
  */
@@ -102,7 +103,13 @@ export const filetoBase64 = (file: any): Promise<any> => {
     const reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onload = (event) => {
-      resolve(event!.target.result)
+      if (event.target) {
+        resolve(event.target.result)
+      } else {
+        reject(
+          console.error(event)
+        )
+      }
     }
   })
 }
