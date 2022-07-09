@@ -21,7 +21,6 @@ const defineReactive = (obj: Object, key: string, val: any): void => {
 /**
  * 设计一个对象的观测者
  * @param { Object } obj 对象
- * @param { String } key 对象的key
  * @return { Object } 返回一个可观测对象
  * @example  let obj = observerDef({name:'alex',age:18})
 */
