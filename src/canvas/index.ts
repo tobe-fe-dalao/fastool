@@ -1,13 +1,4 @@
 /**
- * @func isSupportWebP
- * @returns {boolean}
- * @desc 判断浏览器是否支持webP格式图片
- */
-export function isSupportWebP() {
-  return !![].map && document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') == 0;
-}
-
-/**
  * @func getImageBase64Url
  * @param {HTMLImageElement} image
  * @returns {string}
