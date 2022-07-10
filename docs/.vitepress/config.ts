@@ -49,20 +49,104 @@ function sidebarGuide() {
         { text: '参与编辑', link: '/guide/EditMd' },
       ],
     },
-    { text: 'Time操作', link: '/guide/Time' },
-    { text: 'Random操作', link: '/guide/Random' },
-    { text: 'Media操作', link: '/guide/Media' },
-    { text: 'Polyfill兼容', link: '/guide/Polyfill' },
-    { text: 'Canvas操作', link: '/guide/Canvas' },
-    { text: 'Event事件', link: '/guide/Event' },
-    { text: 'Plugins插件库', link: '/guide/Plugins' },
-    { text: 'Fn函数', link: '/guide/Fn' },
-    { text: 'Tools工具库', link: '/guide/Tools' },
-    { text: 'Regex校验', link: '/guide/Regex' },
-    { text: 'URL链接操作', link: '/guide/URL' },
-    { text: 'Device设备', link: '/guide/Device' },
-    { text: 'Browser浏览器', link: '/guide/Browser' },
-    { text: 'Number操作', link: '/guide/Number' },
+    {
+      text: 'Time操作',
+      collapsible: false,
+      items: [
+        { text: 'Time操作', link: '/guide/Time' }
+      ]
+    },
+    {
+      text: 'Random操作',
+      collapsible: false,
+      items: [
+        { text: 'Random操作', link: '/guide/Random' }
+      ]
+    },
+    {
+      text: 'Media操作',
+      collapsible: false,
+      items: [
+        { text: 'Media操作', link: '/guide/Media' }
+      ]
+    },
+    {
+      text: 'Polyfill兼容',
+      collapsible: false,
+      items: [
+        { text: 'Polyfill兼容', link: '/guide/Polyfill' }
+      ]
+    },
+    {
+      text: 'Canvas操作',
+      collapsible: false,
+      items: [
+        { text: 'Canvas操作', link: '/guide/Canvas' }
+      ]
+    },
+    {
+      text: 'Event事件',
+      collapsible: false,
+      items: [
+        { text: 'Event事件', link: '/guide/Event' }
+      ]
+    },
+    {
+      text: 'Plugins插件库',
+      collapsible: false,
+      items: [
+        { text: 'Plugins插件库', link: '/guide/Plugins' }
+      ]
+    },
+    {
+      text: 'Fn函数',
+      collapsible: false,
+      items: [
+        { text: 'Fn函数', link: '/guide/Fn' }
+      ]
+    },
+    {
+      text: 'Tools工具库',
+      collapsible: false,
+      items: [
+        { text: 'Tools工具库', link: '/guide/Tools' }
+      ]
+    },
+    {
+      text: 'Regex校验',
+      collapsible: false,
+      items: [
+        { text: 'Regex校验', link: '/guide/Regex' }
+      ]
+    },
+    {
+      text: 'URL链接操作',
+      collapsible: false,
+      items: [
+        { text: 'URL链接操作', link: '/guide/URL' }
+      ]
+    },
+    {
+      text: 'Device设备',
+      collapsible: false,
+      items: [
+        { text: 'Device设备', link: '/guide/Device' }
+      ]
+    },
+    {
+      text: 'Browser浏览器',
+      collapsible: false,
+      items: [
+        { text: 'Browser浏览器', link: '/guide/Browser' }
+      ]
+    },
+    {
+      text: 'Number操作',
+      collapsible: false,
+      items: [
+        { text: 'Number操作', link: '/guide/Number' }
+      ]
+    },
     {
       text: '本地存储',
       collapsible: true,
@@ -71,6 +155,12 @@ function sidebarGuide() {
         { text: 'Storage操作', link: '/guide/Storage' },
       ],
     },
-    { text: 'String操作', link: '/guide/String' },
+    {
+      text: 'String操作',
+      collapsible: false,
+      items: [
+        { text: 'String操作', link: '/guide/String' }
+      ]
+    },
   ]
 }
