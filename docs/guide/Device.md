@@ -1,6 +1,6 @@
 # Device
 ## getOS
-获取操作系统类型
+🧿获取操作系统类型
 ```typescript
 /**
  * @func getOS
@@ -9,18 +9,18 @@
  * @example const device = getOS()
  */
 ```
-## isWeixin
-是否是微信
+## isWeiXin
+🧿是否是微信
 ```typescript
 /**
- * @func isWeixin
+ * @func isWeiXin
  * @desc  是否是微信
  * @return { boolean } 是否微信
- * @example const iswx = isWeixin()
+ * @example const iswx = isWeiXin()
  */
 ```
 ## isMobile
-是否是移动端
+🧿是否是移动端
 ```typescript
 /**
  * @func isMobile
@@ -30,7 +30,7 @@
  */
 ```
 ## isSupportCamera
-是否支持摄像头
+🧿是否支持摄像头
 ```typescript
 /**
  * @func isSupportCamera
@@ -40,7 +40,7 @@
  */
 ```
 ## getDeviceId
-生成设备唯一ID
+🧿生成设备唯一ID
 ```typescript
 /**
  * @func getDeviceId

@@ -1,5 +1,4 @@
 export * from './browser';
-export * from './cookie';
 export * from './string';
 export * from './regex';
 export * from './device';

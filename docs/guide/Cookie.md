@@ -1,6 +1,6 @@
 # Cookie
 ## setCookie
-设置cookie
+🧿设置cookie
 ```typescript
 /**
  * @func setCookie
@@ -12,7 +12,7 @@
  */
 ```
 ## getCookie
-获取cookie
+🧿获取cookie
 ```typescript
 /**
  * @func getCookie
@@ -23,7 +23,7 @@
  */
 ```
 ## clearCookie
-清除cookie
+🧿清除cookie
 ```typescript
 /**
  * @func clearCookie

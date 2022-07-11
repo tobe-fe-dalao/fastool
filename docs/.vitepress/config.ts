@@ -52,7 +52,8 @@ function sidebarGuide() {
     {
       text: 'Browser浏览器',
       items: [
-        { text: 'Browser', link: '/guide/Browser' }
+        { text: 'Browser', link: '/guide/Browser' },
+        { text: 'Device设备', link: '/guide/Device' }
       ]
     },
     {
@@ -140,14 +141,6 @@ function sidebarGuide() {
         { text: 'URL链接操作', link: '/guide/URL' }
       ]
     },
-    {
-      text: 'Device设备',
-      collapsible: false,
-      items: [
-        { text: 'Device设备', link: '/guide/Device' }
-      ]
-    },
-
     {
       text: 'Number操作',
       collapsible: false,
