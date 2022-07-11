@@ -1,98 +1,103 @@
 # Browser
 ## isBrowser
-检测代码是否运行在浏览器环境
+🧿检测代码是否运行在浏览器环境
 ```typescript
 /**
  * @func isBrowser
- * @desc  检测代码是否运行在浏览器环境
- * @return { boolean }
- * @example if (isBrowser) { doSomething... }
- */
-```
-## isSupportWebP
-判断浏览器是否支持webP格式图片
-```typescript
-/**
- * @func isSupportWebP
- * @desc  判断浏览器是否支持webP格式图片
- * @return { boolean }
- * @example if (isSupportWebP) { doSomething... }
- */
-```
-## scrollToTop
-平滑滚动到顶部
-```typescript
-/**
- * @func scrollToTop
- * @desc  平滑滚动到顶部
- * @example scrollToTop()
+ * @return {boolean}
+ * @desc 检测代码是否运行在浏览器环境
+ * @example if (isBrowser()) {...}
  */
 ```
 ## getBrowserInfo
-获取浏览器类型和版本
+🧿获取浏览器类型和版本
 ```typescript
 /**
  * @func getBrowserInfo
- * @desc  获取浏览器类型和版本
- * @return { object } 浏览器类型和版本
- * @example const info = getBrowserInfo()
+ * @return {String} 浏览器类型和版本
+ * @desc 📝 获取浏览器类型和版本
+ * @example const browserInfo = getBrowserInfo();
  */
 ```
+## isSupportWebP
+🧿判断浏览器是否支持webP格式图片
+```typescript
+/**
+ * @func isSupportWebP
+ * @desc 判断浏览器是否支持webP格式图片
+ * @return {boolean}
+ * @example if (isSupportWebP()) {...}
+ */
+```
+## scrollToTop
+🧿平滑滚动到顶部
+```typescript
+/**
+* @func scrollToTop
+* @return {void}
+* @desc 📝 平滑滚动到顶部
+* @example scrollToTop();
+*/
+```
 ## scrollToBottom
-平滑滚动到底部
+🧿平滑滚动到底部
 ```typescript
 /**
  * @func scrollToBottom
- * @desc  平滑滚动到底部
- * @example scrollToBottom()
+ * @return {void}
+ * @desc 📝 平滑滚动到底部
+ * @example scrollToBottom();
  */
 ```
 ## smoothScroll
-平滑滚动到指定位置
+🧿平滑滚动到指定位置
 ```typescript
 /**
  * @func smoothScroll
- * @desc  平滑滚动到指定位置
- * @param { number } top 滚动到的位置
- * @param { number } duration 滚动的时间
- * @example smoothScroll(100, 300)
- */
+ * @param {number} top 滚动到的位置
+ * @param {number} duration 滚动的时间
+ * @return {void}
+ * @desc 📝 平滑滚动到指定位置
+ * @example smoothScroll(0, 1000);
+*/
 ```
 ## getClientHeight
 获取可视窗口的高度
 ```typescript
 /**
  * @func getClientHeight
- * @desc  获取可视窗口的高度
- * @return { number } 可视窗口高度
- * @example const height = getClientHeight()
+ * @return {number}
+ * @desc 📝 获取可视窗口的高度
+ * @example getClientHeight();
  */
 ```
 ## getClientWidth
-获取可视窗口的宽度
+🧿获取可视窗口的宽度
 ```typescript
 /**
  * @func getClientWidth
- * @desc  获取可视窗口的宽度
- * @return { number } 可视窗口宽度
- * @example const height = getClientWidth()
+ * @return {number}
+ * @desc 📝 获取可视窗口的高度
+ * @example const clientW = getClientWidth();
  */
 ```
 ## toFullScreen
-全屏
+🧿打开全屏
 ```typescript
 /**
  * @func toFullScreen
- * @desc  全屏
- * @example toFullScreen()
+ * @return {void}
+ * @desc 📝 全屏
+ * @example toFullScreen();
  */
 ```
-## exitFullscreen
-退出全屏
+## exitFullScreen
+🧿退出全屏
 ```typescript
 /**
- * @func exitFullscreen
- * @desc  退出全屏
- * @example exitFullscreen()
+ * @func exitFullScreen
+ * @return {void}
+ * @desc 📝 退出全屏
+ * @example exitFullScreen();
  */
 ```

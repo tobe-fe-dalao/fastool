@@ -50,6 +50,20 @@ function sidebarGuide() {
       ],
     },
     {
+      text: 'Browser浏览器',
+      items: [
+        { text: 'Browser', link: '/guide/Browser' }
+      ]
+    },
+    {
+      text: '本地储存',
+      collapsible: true,
+      items: [
+        { text: 'Cookie操作', link: '/guide/Cookie' },
+        { text: 'Storage操作', link: '/guide/Storage' },
+      ],
+    },
+    {
       text: 'Time操作',
       collapsible: false,
       items: [
@@ -133,27 +147,13 @@ function sidebarGuide() {
         { text: 'Device设备', link: '/guide/Device' }
       ]
     },
-    {
-      text: 'Browser浏览器',
-      collapsible: false,
-      items: [
-        { text: 'Browser浏览器', link: '/guide/Browser' }
-      ]
-    },
+
     {
       text: 'Number操作',
       collapsible: false,
       items: [
         { text: 'Number操作', link: '/guide/Number' }
       ]
-    },
-    {
-      text: '本地存储',
-      collapsible: true,
-      items: [
-        { text: 'Cookie操作', link: '/guide/Cookie' },
-        { text: 'Storage操作', link: '/guide/Storage' },
-      ],
     },
     {
       text: 'String操作',
