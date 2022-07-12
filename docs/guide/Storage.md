@@ -4,10 +4,10 @@
 ```typescript
 /**
  * @func setLocalStorage
- * @param {string} key
- * @param {string} value
- * @returns {void}
  * @desc  设置localStorage
+ * @param { string } key
+ * @param { string } value
+ * @return { void }
  */
 ```
 ## getLocalStorage
@@ -15,9 +15,9 @@
 ```typescript
 /**
  * @func getLocalStorage
- * @param {string} key
- * @returns {string}
  * @desc  获取localStorage
+ * @param { string } key
+ * @return { string }
  */
 ```
 
@@ -26,9 +26,9 @@
 ```typescript
 /**
  * @func delLocalStorage
- * @param {string} key
- * @returns {any}
  * @desc  删除localStorage
+ * @param { string } key
+ * @return { any }
  */
 ```
 # SessionStorage
@@ -37,10 +37,10 @@
 ```typescript
 /**
  * @func setSessionStorage
- * @param {string} key
- * @param {string} value
- * @returns {any}
  * @desc  设置sessionStorage
+ * @param { string } key
+ * @param { string } value
+ * @return { any }
  */
 ```
 ## getSessionStorage
@@ -48,9 +48,9 @@
 ```typescript
 /**
  * @func getSessionStorage
- * @param {string} key
- * @returns {any}
  * @desc  获取sessionStorage
+ * @param { string } key
+ * @return { any }
  */
 ```
 ## delSessionStorage
@@ -58,9 +58,9 @@
 ```typescript
 /**
  * @func delSessionStorage
- * @param {string} key
- * @returns {any}
  * @desc  删除sessionStorage
+ * @param { string } key
+ * @return { any }
  */
 ```
 

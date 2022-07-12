@@ -18,14 +18,16 @@
 代码块紧跟其后，代码块内容必须为`Function`的注释，便于后期直接替换
 ```typescript
 // 这是一个完整规范
-# observeProxy   //标题
+## observeProxy   //标题
 设计一个对象的观测者-proxy方案  //注释
 /**
  * @func observeProxy
  * @desc 设计一个对象的观测者-proxy方案
  * @param { Object } obj 对象
  * @return { cal } 观测对象回调方法
+ * @github git链接
  * @example  let obj = observeProxy({name:'alex',age:18},callback)
+ * @size 插件大小
 */
 ```
 
