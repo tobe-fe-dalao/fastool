@@ -3,6 +3,7 @@
  * @param {HTMLImageElement} image
  * @returns {string}
  * @desc 获取图片base64Url
+ * @example getImageBase64Url(image)
  */
 export function getImageBase64Url(image: HTMLImageElement): string {
   const canvas = document.createElement('canvas');
@@ -19,6 +20,7 @@ export function getImageBase64Url(image: HTMLImageElement): string {
  * @param {string} color
  * @returns {object}
  * @desc 将颜色色值转rgba
+ * @example changeColorToRGBA('#fff') => {r: 255, g: 255, b: 255, a: 1}
  */
 export function changeColorToRGBA(color: string) {
   let canvas = (window as any).canvas;

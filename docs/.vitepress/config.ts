@@ -65,9 +65,10 @@ function sidebarGuide() {
       ],
     },
     {
-      text: 'Time操作',
+      text: '实用工具函数',
       collapsible: false,
       items: [
+        { text: 'Regex校验', link: '/guide/Regex' },
         { text: 'Time操作', link: '/guide/Time' }
       ]
     },
