@@ -1,5 +1,4 @@
-import { isBrowser } from '../browser';
-
+import { isBrowser } from '../browser/isBrowser';
 
 /**
  * @func setCookie
@@ -7,6 +6,7 @@ import { isBrowser } from '../browser';
  * @param {value}[可选] cookie名称
  * @returns {void}
  * @dec 📝 设置cookie
+ * @example setCookie('key', 'value');
  */
 export const setCookie = (key: string, value: string, expire: any): void => {
   const d = new Date();
@@ -19,6 +19,8 @@ export const setCookie = (key: string, value: string, expire: any): void => {
  * @func getCookie
  * @param key[可选] cookie名称
  * @returns {Array | string | undefined}
+ * @dec 📝 获取cookie
+ * @example getCookie('key');
  */
 export const getCookie = (key?: string): Array<string> | string | undefined => {
   // Environmental Test
@@ -40,6 +42,7 @@ export const getCookie = (key?: string): Array<string> | string | undefined => {
  * @param key[可选] cookie名称
  * @returns {void}
  * @desc 📝 清除cookie
+ * @example clearCookie('key');
  */
 export const clearCookie = (key?: string): void => {
   let cookie = getCookie();

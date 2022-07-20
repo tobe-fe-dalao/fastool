@@ -1,6 +1,6 @@
 {
     "name": "fastool",
-    "version": "0.0.2",
+    "version": "0.1.3",
     "description": "一个短小而精悍的现代JavaScript使用工具库",
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.js",
@@ -16,10 +16,10 @@
         "docs:serve": "vitepress serve docs"
     },
     "homepage": "",
-    "bugs": "https://github.com/MaleWeb/fastool/issues",
+    "bugs": "https://github.com/tobe-fe-dalao/fastool/issues",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/MaleWeb/fastool.git"
+        "url": "git+https://github.com/tobe-fe-dalao/fastool.git"
     },
     "author": "BlindMonk",
     "license": "Apache-2.0",

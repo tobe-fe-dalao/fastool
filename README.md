@@ -19,7 +19,7 @@
 # Fastool
 一个短小而精悍的现代JavaScript使用工具库
 
-[使用文档介绍]()  |  [博文介绍]()  
+[使用文档介绍](https://tobe-fe-dalao.github.io/fastool/guide/)  |  [博文介绍]()  
  <p>
  <img src="./public/fastool.jpg"></img>
  </p>

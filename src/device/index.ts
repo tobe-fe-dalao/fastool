@@ -1,7 +1,8 @@
-
 /**
- * 获取操作系统类型
- * @return {String} 操作系统类型
+ * @func: getOS
+ * @returns {String} 操作系统类型
+ * @desc: 获取操作系统类型
+ * @example:  getOS()
  */
 export const getOS = (): string => {
   let userAgent = navigator.userAgent,
@@ -24,11 +25,12 @@ export const getOS = (): string => {
   return 'Unkonwn'
 }
 /**
- * @funcisWeixin
- * @return {Boolean} 是否是微信
+ * @func isWeiXin
+ * @returns {Boolean} 是否是微信
  * @desc 📝 是否是微信浏览器
+ * @example:  isWeiXin()
  */
-export const isWeixin = (): boolean => {
+export const isWeiXin = (): boolean => {
   const ua = window.navigator.userAgent.toLowerCase();
   const match = ua.match(/MicroMessenger/i);
   if (match === null) {
@@ -43,6 +45,7 @@ export const isWeixin = (): boolean => {
  * @func isMobile
  * @return {Boolean} 是否是移动端
  * @desc 📝 是否是移动端
+ * @example:  isMobile()
  */
 export const isMobile = (): boolean => {
   if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone)/i))) {
@@ -55,6 +58,7 @@ export const isMobile = (): boolean => {
  * @func isSupportCamera
  * @return {Boolean} 是否支持摄像头
  * @desc 📝 是否支持摄像头
+ * @example:  isSupportCamera()
  */
 export const isSupportCamera = (): boolean => {
   if (navigator.mediaDevices && (navigator as any).mediaDevices.getUserMedia) {
@@ -80,11 +84,11 @@ export const isSupportCamera = (): boolean => {
 
 
 /**
- * 通过三方库生成设备唯一ID
- * @description 三方库地址：https://github.com/fingerprintjs/fingerprintjs
+ * @func getDeviceId
+ * @desc 通过三方库生成设备唯一ID 三方库地址：https://github.com/fingerprintjs/fingerprintjs
  * @returns {Promise} 设备唯一ID
+ * @example:  getDeviceId()
  */
-
 export const getDeviceId = () => {
   //远程加载方式 import(https://openfpcdn.io/fingerprintjs/v3)
   return new Promise((resolve, reject) => {

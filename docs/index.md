@@ -10,16 +10,16 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /guide/Storage
+      link: /guide/
     - theme: alt
       text: View on GitHub
-      link: https://github.com/MaleWeb/fastool
+      link: https://github.com/tobe-fe-dalao/fastool
 
 features:
-  - title: TS
-    details: 短小，精悍，基于TS 
-  - title: ES6
-    details: 适用于现代ES6规范
+  - title: TypeScript
+    details: 基于 TypeScript 编写，Rollup打包的一款现代 JS 函数类库 
+  - title: ES6+
+    details: 适用于现代浏览器，基于ES6+的JavaScript规范，聚焦业务而非fn
   - title: Convenient
     details: 包含动态插件库，可以随时调用，做随手可得且最全的工具库
   - title: More

@@ -1,4 +1,5 @@
 // 整理常用的校验规则-扫地盲僧含泪整理转载署名-授权许可证
+// TODO:干到这里了
 /**
  * @func isChines
  * @param {string} str
