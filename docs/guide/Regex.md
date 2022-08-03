@@ -90,3 +90,14 @@
  * @example if (isUrl(str)) { doSomething }
  */
 ```
+## isColor
+判断字符串是否是十六进制的颜色值
+```typescript
+/**
+ * @func isColor
+ * @desc 判断字符串是否是十六进制的颜色值
+ * @param {string} value 需要判断的数据
+ * @returns {boolean} 校验是否是十六进制的颜色值
+ * @example if (isColor(str)) { doSomething }
+ */
+```
