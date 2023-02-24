@@ -1,6 +1,6 @@
 {
     "name": "fastool",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "description": "一个短小而精悍的现代JavaScript使用工具库",
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.js",
@@ -13,7 +13,8 @@
         "build": "rimraf dist && cross-env NODE_ENV=production rollup -c",
         "docs:dev": "vitepress dev docs",
         "docs:build": "vitepress build docs",
-        "docs:serve": "vitepress serve docs"
+        "docs:serve": "vitepress serve docs",
+        "release": "standard-version"
     },
     "homepage": "",
     "bugs": "https://github.com/tobe-fe-dalao/fastool/issues",
