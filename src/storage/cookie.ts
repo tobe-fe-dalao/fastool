@@ -1,60 +1,38 @@
-import { isBrowser } from '../browser/isBrowser';
-
 /**
- * @func setCookie
- * @param {key}[可选] cookie名称
- * @param {value}[可选] cookie名称
- * @returns {void}
- * @dec 📝 设置cookie
- * @example setCookie('key', 'value');
+ * 获取 cookie 值
+ * @param {string} key cookie 名称
+ * @returns {string} cookie 值
  */
-export const setCookie = (key: string, value: string, expire: any): void => {
-  const d = new Date();
-  d.setDate(d.getDate() + expire);
-  document.cookie = `${key}=${value};expires=${d.toUTCString()}`
-};
-
-
-/**
- * @func getCookie
- * @param key[可选] cookie名称
- * @returns {Array | string | undefined}
- * @dec 📝 获取cookie
- * @example getCookie('key');
- */
-export const getCookie = (key?: string): Array<string> | string | undefined => {
-  // Environmental Test
-  if (!isBrowser) throw new Error("Non-browser environment, unavailable 'getCookie'");
-
-  if (!document.cookie) throw new Error('No Cookie Found');
-
-  if (key) {
-    const reg = new RegExp(`(^| )${key}=([^;]*)(;|$)`);
-    const arr = document.cookie.match(reg);
-    return arr ? arr[2] : undefined;
-  }
-  // Get Cookies && String => Array
-  return document.cookie.split(';');
-};
-
-/** 
- * @func clearCookie
- * @param key[可选] cookie名称
- * @returns {void}
- * @desc 📝 清除cookie
- * @example clearCookie('key');
- */
-export const clearCookie = (key?: string): void => {
-  let cookie = getCookie();
-  // Environmental Test
-  if (!isBrowser) throw new Error("Non-browser environment, unavailable 'cleanCookies'");
-  if (!document.cookie) throw new Error('No Cookie Found');
-  if (key) {
-    document.cookie = `${encodeURIComponent(key)}=;expires=${new Date()}`
-  } else {
-    for (let i = 0; i < cookie!.length; i++) {
-      const element = cookie![i];
-      document.cookie = element.replace(/^ +/, '').replace((element as any).match(/=(\S*)/)[1], ``);
+export const getCookie = (key: string): string => {
+  const cookies = document.cookie.split(';');
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].trim();
+    if (cookie.startsWith(`${key}=`)) {
+      return cookie.substring(key.length + 1);
     }
   }
-}
+  return '';
+};
+
+/**
+ * 设置 cookie
+ * @param {string} key cookie 名称
+ * @param {string} value cookie 值
+ * @param {number} expire 过期时间（单位：毫秒，默认 1 天）
+ */
+export const setCookie = (key = '', value = '', expire = 86400000): void => {
+  if (typeof key !== 'string' || typeof value !== 'string' || typeof expire !== 'number') {
+    throw new TypeError('Invalid arguments');
+  }
+  const d = new Date();
+  d.setTime(d.getTime() + expire);
+  document.cookie = `${key}=${value};expires=${d.toUTCString()}`;
+};
+
+/**
+ * 删除 cookie
+ * @param {string} key cookie 名称
+ */
+export const deleteCookie = (key: string): void => {
+  setCookie(key, '', -1);
+};

@@ -23,11 +23,11 @@
         <div style="height:800px"></div>
         <img src="./logo.svg" />
         <!-- Target -->
-        <input id="foo" value="https://github.com/zenorocha/clipboard.js.git" />
+        <!-- <input id="foo" value="https://github.com/zenorocha/clipboard.js.git" /> -->
 
         <!-- Trigger -->
         <button class="btn" data-clipboard-target="#foo">
-            <img src="assets/clippy.svg" alt="Copy to clipboard" />
+            <!-- <img src="assets/clippy.svg" alt="Copy to clipboard" /> -->
         </button>
     </div>
 </body>
@@ -50,10 +50,11 @@
             start,
             dayJs,
             log,
-            copyJs
+            copyJs,
+            isObject
         } = fastool
         const obj = { name: '爱神的箭卡萨丁', age: 34, lib: { home: 'index' } }
-
+        console.log(isObject('2222'), 'test')
         function handle(val) {
             console.log(val, '回调函数')
         }
