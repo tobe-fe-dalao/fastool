@@ -14,7 +14,7 @@ import { terser } from 'rollup-plugin-terser';
 import styles from 'rollup-plugin-styles';
 import dts from 'rollup-plugin-dts';
 // 替换环境变量
-// import replace from '@rollup/plugin-replace';
+import replace from '@rollup/plugin-replace';
 // 热更新服务
 import livereload from 'rollup-plugin-livereload';
 // 开发服务器
@@ -23,6 +23,8 @@ import serve from 'rollup-plugin-serve';
 import del from 'rollup-plugin-delete';
 // import eslint from '@rollup/plugin-eslint'
 import pkg from './package.json';
+import dotenv from 'dotenv';
+dotenv.config();
 // 判断是是否为生产环境
 // 开发环境or生产环境
 const isPro = function () {
@@ -77,6 +79,10 @@ export default [
           contentBase: './',
           openPage: '/examples/index.html',
         }),
+      replace({
+        '{{ rollupVersion }}': process.env.ROLLUP_VERSION,
+        '{{ typeScriptVersion }}': process.env.TYPESCRIPT_VERSION,
+      }),
     ],
   },
   {

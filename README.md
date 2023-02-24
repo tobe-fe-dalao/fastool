@@ -1,19 +1,18 @@
-<p align="center" style="margin:30px 0;">
+<p align="center" style="margin:10px 0;">
     <img width="550" height="auto" src="./examples/logo.svg" />
   
 </p>
  
 <p align="center">  
-    <img src="https://img.shields.io/badge/npm-v0.0.1-brightgreen" />
-    <img src="https://img.shields.io/badge/-Rollup-34495e?logo=rollup" />
-    <img src="https://img.shields.io/badge/-TypeScript-blue?logo=typescript&logoColor=white" />
+    <img src="https://img.shields.io/npm/v/fastool.svg" />
+    <img src="https://img.shields.io/badge/Rollup-v{{rollupVersion}}-blue?logo=rollup" />
+    <img src="https://img.shields.io/npm/v/typescript/{{typeScriptVersion}}?label=TypeScript&logo=typescript&logoColor=white" />
     <img src="https://img.shields.io/badge/-ESLint-4b32c3?logo=eslint&logoColor=white" />
     <img src="https://img.shields.io/badge/-pnpm-F69220?logo=pnpm&logoColor=white" />
     <img src="https://img.shields.io/badge/-Prettier-ef9421?logo=Prettier&logoColor=white" alt="Prettier">
     <img src="https://img.shields.io/badge/license-Apache-blue.svg" alt="Apache">   
     
 <p>   
-
 
 
 # Fastool
