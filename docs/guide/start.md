@@ -1,2 +1,5 @@
 # 快速开始
-待编辑...
+自动添加版本
+```bash
+npm version patch
+```
