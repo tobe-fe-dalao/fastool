@@ -61,8 +61,10 @@
         "vitepress": "1.0.0-alpha.47"
     },
     "dependencies": {
+        "@rollup/plugin-replace": "^5.0.2",
         "@types/node": "^17.0.45",
         "cross-env": "^7.0.3",
+        "rimraf": "^4.1.2",
         "rollup-plugin-uglify": "^6.0.4"
     }
 }

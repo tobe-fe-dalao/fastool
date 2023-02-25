@@ -1,4 +1,4 @@
-import { importPluginByUrl } from '../function/tool'
+import importPlugin from './importPlugin'
 /** 
  * @func copyJs
  * @desc 复制文本到剪贴板
@@ -10,11 +10,9 @@ import { importPluginByUrl } from '../function/tool'
 */
 
 const copyJs = async (): Promise<any> => {
-  return await importPluginByUrl<any>(
+  return await importPlugin(
     'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js',
     'ClipboardJS',
-    'copyJs',
-    false
   )
 }
 export default copyJs

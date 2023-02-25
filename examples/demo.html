@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Example</title>
+  <script type="module" src="../dist/index.umd.js"></script>
+  <script type="module">
+    document.addEventListener('DOMContentLoaded', function () {
+      console.log(fastool)
+      // async function main() {
+      //   try {
+      //     const myModule = await fastool.importPlugin('https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.core.js');
+      //     console.log(myModule, '导出模块');
+      //   } catch (error) {
+      //     console.error(error);
+      //   }
+      // }
+      // main();
+      fastool.importPlugin('lodash','https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.core.js').then(module=>{
+        console.log(module)
+      });
+    })
+
+  </script>
+</head>
+
+<body>
+  <h1>Hello World!</h1>
+</body>
+<script>
+
+</script>
+
+</html>

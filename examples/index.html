@@ -32,7 +32,7 @@
     </div>
 </body>
 <script type="text/javascript">
-    window.onload = () => {
+    document.addEventListener('DOMContentLoaded', function () {
         const { observeProxy, getCookie, setCookie, clearCookie,
             delCookie,
             smoothScroll,
@@ -51,10 +51,16 @@
             dayJs,
             log,
             copyJs,
-            isObject
+            importPlugin
         } = fastool
         const obj = { name: '爱神的箭卡萨丁', age: 34, lib: { home: 'index' } }
-        console.log(isObject('2222'), 'test')
+
+        async function main() {
+            const myModule = await importPlugin('https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.esm-browser.js', 'vue');
+            console.log(myModule, '插件加载模块');
+
+        }
+        main();
         function handle(val) {
             console.log(val, '回调函数')
         }
@@ -86,11 +92,7 @@
             console.log(state.lib.home)
             delete state.age
         }
-        document.getElementById('clearCookie').onclick = () => {
-            delCookie('name')
-            // clearCookie()
-            console.log(getCookie(), 'getCookie')
-        }
+
         document.getElementById('scroll').onclick = () => {
             let height = getClientWidth()
             alert(height)
@@ -101,12 +103,10 @@
         document.getElementById('unfullscreen').onclick = () => {
             exitFullscreen()
         }
-        setCookie('name', 'male')
-        console.log(getCookie('name'), '单个')
-        console.log(getCookie(), 'getCookie')
 
 
-    }
+
+    });
 </script>
 <style>
     body {

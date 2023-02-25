@@ -1,4 +1,4 @@
-import { importPluginByUrl } from '../function/tool'
+import importPlugin from './importPlugin'
 /**
  * @func dayJs
  * @desc dayjs日期格式化
@@ -6,11 +6,9 @@ import { importPluginByUrl } from '../function/tool'
  * @example dayJs().format('YYYY-MM-DD')
  */
 const dayJs = async () => {
-  return await importPluginByUrl<any>(
+  return await importPlugin(
     'https://unpkg.com/dayjs@1.11.3/dayjs.min.js',
-    'dayjs',
-    'dayJs',
-    false
+    'dayjs'
   )
 }
 export default dayJs

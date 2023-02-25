@@ -1,4 +1,4 @@
-import { importPluginByUrl } from '../function/tool'
+import importPlugin from './importPlugin'
 /**
  * @func keyCode
  * @desc 监听键盘按键类库
@@ -15,10 +15,9 @@ interface ITinyKey {
   parseKeybinding: (keyName: string) => Array<any>
 }
 const keyCode = async () => {
-  return await importPluginByUrl<ITinyKey>(
+  return await importPlugin(
     'https://unpkg.com/tinykeys@latest/dist/tinykeys.module.js',
     'tinykeys',
-    'keyCode'
   )
 }
 export default keyCode

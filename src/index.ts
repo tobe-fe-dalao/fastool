@@ -1,3 +1,4 @@
+
 export * from './browser';
 export * from './string';
 export * from './regex';
@@ -12,4 +13,4 @@ export * from './tools';
 export * from './plugins';
 export * from './dom';
 export * from './log';
-export * from './objects';
+

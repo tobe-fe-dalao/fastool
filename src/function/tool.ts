@@ -157,30 +157,32 @@ export const sleep = async (wait: number) => new Promise(resolve => setTimeout(r
  */
 export function importPluginByUrl<T = any>(cdnUrl: string, pluginName: string, newName: string, isEsm: boolean = true): Promise<T> | void {
   if (isEsm) {
-    // TOD若不支持ESM   或者polyfill方案：https://github.com/systemjs/systemjs
-    import(cdnUrl as any)
+    // TODO: 若不支持 ESM 或者需要 polyfill 可以使用 SystemJS 等库
+    return import(cdnUrl as any)
       .then((module) => {
-        window[newName] = module
-        console.log(module)
+        window[newName] = module;
+        console.log(module);
+        return module;
       });
   } else {
     return new Promise((resolve, reject) => {
-      const scriptList = Array.from(document.getElementsByTagName('script'))
+      const scriptList = Array.from(document.getElementsByTagName('script'));
       const hasInject = window[pluginName] && scriptList.some(script => script.getAttribute('src') === cdnUrl)
       if (hasInject) {
         window[newName] = window[pluginName];
-        return resolve(window[pluginName]?.default ?? window[pluginName]);
-      }
-      const script = document.createElement('script')
-      script.setAttribute('src', cdnUrl)
-      document.head.appendChild(script)
-      script.onload = () => {
-        window[newName] = window[pluginName];
         resolve(window[pluginName]?.default ?? window[pluginName]);
+      } else {
+        const script = document.createElement('script')
+        script.setAttribute('src', cdnUrl)
+        document.head.appendChild(script)
+        script.onload = () => {
+          window[newName] = window[pluginName];
+          resolve(window[pluginName]?.default ?? window[pluginName]);
+        }
+        script.onerror = () => {
+          reject(`加载${pluginName}失败`)
+        }
       }
-      script.onerror = () => {
-        reject(`加载${pluginName}失败`)
-      }
-    })
+    });
   }
 }
