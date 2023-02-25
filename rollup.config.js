@@ -23,6 +23,7 @@ import serve from 'rollup-plugin-serve';
 import del from 'rollup-plugin-delete';
 // import eslint from '@rollup/plugin-eslint'
 import pkg from './package.json';
+import gzip from 'rollup-plugin-gzip';
 // 判断是是否为生产环境
 // 开发环境or生产环境
 const isPro = function () {
@@ -70,6 +71,7 @@ export default [
           verbose: false,
         }),
       isPro() && terser(),
+      isPro() && gzip(),
       !isPro() &&
         serve({
           open: false,
@@ -77,7 +79,6 @@ export default [
           contentBase: './',
           openPage: '/examples/index.html',
         }),
-     
     ],
   },
   {
