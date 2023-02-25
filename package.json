@@ -1,6 +1,6 @@
 {
     "name": "fastool",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "description": "一个短小而精悍的现代JavaScript使用工具库",
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.js",
