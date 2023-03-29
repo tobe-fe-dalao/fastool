@@ -1,1 +1,0 @@
-import{_ as a,c as s,o as e,a as t}from"./app.e33a3af0.js";const u=JSON.parse('{"title":"快速开始","description":"","frontmatter":{},"headers":[],"relativePath":"guide/start.md","lastUpdated":1677298523000}'),n={name:"guide/start.md"},o=t("",3),p=[o];function c(r,l,i,d,_,h){return e(),s("div",null,p)}const C=a(n,[["render",c]]);export{u as __pageData,C as default};
