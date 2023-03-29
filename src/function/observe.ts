@@ -9,11 +9,11 @@ const defineReactive = (obj: Object, key: string, val: any): void => {
     enumerable: true,
     configurable: true,
     get() {
-      console.log(`${key}属性被读取了`);
+     // console.log(`${key}属性被读取了`);
       return val
     },
     set(newVal) {
-      console.log(`${key}属性被修改了`);
+      //console.log(`${key}属性被修改了`);
       val = newVal
     }
   })
@@ -44,16 +44,16 @@ export const observeDef = (obj: Object): Object | undefined => {
 export const observeProxy = (obj: Object, cal: (val: any) => void) => {
   return new Proxy(obj, {
     get: function (target, prop) {
-      console.log('get调用了')
+      //console.log('get调用了')
       return Reflect.get(target, prop)
     },
     set: function (target, prop, val) {
       cal(val)
-      console.log('set调用了')
+      //console.log('set调用了')
       return Reflect.set(target, prop, val)
     },
     deleteProperty: function (target, prop) {
-      console.log('deleteProperty调用了')
+      //console.log('deleteProperty调用了')
       return Reflect.deleteProperty(target, prop)
     }
   })
