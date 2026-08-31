@@ -1,1 +1,1 @@
-export * from './print'
+export { default as Print } from './print';

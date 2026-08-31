@@ -6,3 +6,12 @@ demo/
 .vscode
 .DS_Store
 .history/
+
+# pnpm（见 pnpm-workspace.yaml 中的 storeDir 配置）
+.pnpm-store/
+.pnpm-home/
+
+# VitePress 构建缓存与产物（可重新生成）
+docs/.vitepress/.temp/
+docs/.vitepress/dist/
+docs/.vitepress/cache/

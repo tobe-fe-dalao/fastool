@@ -1,17 +1,16 @@
 /**
  * @func exitFullScreen
+ * @desc Exit fullscreen (compatible with vendor prefixes; silently skipped under SSR)
  * @returns {void}
- * @desc 📝 退出全屏
  * @example exitFullScreen();
  */
 export const exitFullScreen = (): void => {
-  if (document.exitFullscreen) {
-    document.exitFullscreen()
-  } else if ((document as any).msExitFullscreen) {
-    (document as any).msExitFullscreen()
-  } else if ((document as any).mozCancelFullScreen) {
-    (document as any).mozCancelFullScreen()
-  } else if ((document as any).webkitExitFullscreen) {
-    (document as any).webkitExitFullscreen()
-  }
-}
+  if (typeof document === 'undefined') return;
+  const doc: any = document;
+  const exit =
+    doc.exitFullscreen ||
+    doc.msExitFullscreen ||
+    doc.mozCancelFullScreen ||
+    doc.webkitExitFullscreen;
+  if (exit) exit.call(document);
+};

@@ -1,10 +1,10 @@
 /**
  * @func mitt
- * @desc mitt 事件订阅发布及调度中心
+ * @desc mitt event subscription/publishing and dispatch center
  * @github https://github.com/developit/mitt
  * @example
  *    const emitter = mitt(); 
- *    emitter.on('foo', e => console.log('foo', e) )// 事件监听
+ *    emitter.on('foo', e => console.log('foo', e) )// listen
  *    function onFoo() {}
  *    emitter.on('foo', onFoo)   // listen
  *    emitter.off('foo', onFoo)  // unlisten

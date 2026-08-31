@@ -1,34 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fastool · 插件与工具函数示例</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        margin: 40px auto;
+        max-width: 760px;
+        line-height: 1.6;
+      }
+      button {
+        margin-right: 8px;
+        padding: 6px 14px;
+        cursor: pointer;
+      }
+      pre {
+        background: #f6f8fa;
+        padding: 14px;
+        border-radius: 6px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
 
-<head>
-  <title>Example</title>
-  <script type="module" src="../dist/index.umd.js"></script>
-  <script type="module">
-    document.addEventListener('DOMContentLoaded', function () {
-      console.log(fastool)
-      // async function main() {
-      //   try {
-      //     const myModule = await fastool.importPlugin('https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.core.js');
-      //     console.log(myModule, '导出模块');
-      //   } catch (error) {
-      //     console.error(error);
-      //   }
-      // }
-      // main();
-      fastool.importPlugin('lodash','https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.core.js').then(module=>{
-        console.log(module)
+  <body>
+    <h1>fastool 示例</h1>
+    <p>
+      本页需要通过 HTTP 打开（ESM 不支持 <code>file://</code>）：<br />
+      <code>npx serve examples</code> 然后访问本文件。
+    </p>
+
+    <h2>1. 主入口（零依赖，离线可用）</h2>
+    <pre id="core"></pre>
+
+    <h2>2. plugins 入口（运行时从 CDN 加载）</h2>
+    <button id="load-dayjs">加载 dayjs</button>
+    <button id="load-tinykeys">加载 tinykeys</button>
+    <pre id="plugins"></pre>
+
+    <!-- 主入口 UMD：全局变量 fastool -->
+    <script src="../dist/index.umd.min.js"></script>
+    <script>
+      const core = document.getElementById('core');
+      const {
+        camelCase,
+        toThousands,
+        formatDate,
+        chunk,
+        getUrlParams,
+        setUrlParams,
+        getBrowserInfo,
+      } = fastool;
+
+      const lines = [
+        '导出数量：' + Object.keys(fastool).length,
+        'camelCase("hello world") = ' + camelCase('hello world'),
+        'toThousands(1234567)      = ' + toThousands(1234567),
+        'formatDate(now)           = ' + formatDate('YYYY-MM-DD HH:mm:ss'),
+        'chunk([1..5], 2)          = ' + JSON.stringify(chunk([1, 2, 3, 4, 5], 2)),
+        'getUrlParams("?x=1&y=hi") = ' + JSON.stringify(getUrlParams('https://a.com?x=1&y=hi')),
+        'setUrlParams("page", 2)   = ' + setUrlParams('page', 2, 'https://a.com?x=1'),
+        'getBrowserInfo()          = ' + JSON.stringify(getBrowserInfo()),
+      ];
+      core.textContent = lines.join('\n');
+    </script>
+
+    <!-- plugins 入口只有 ESM 产物：内部使用原生动态 import 加载远程模块 -->
+    <script type="module">
+      const out = document.getElementById('plugins');
+      const print = (msg) => {
+        out.textContent += msg + '\n';
+      };
+
+      const { dayJs, keyCode } = await import('../dist/plugins.mjs');
+
+      document.getElementById('load-dayjs').addEventListener('click', async () => {
+        print('正在从 unpkg 加载 dayjs ...');
+        try {
+          const dayjs = await dayJs();
+          print('dayjs 就绪：' + dayjs().format('YYYY-MM-DD HH:mm:ss'));
+        } catch (err) {
+          print('加载失败：' + err.message);
+        }
       });
-    })
 
-  </script>
-</head>
+      document.getElementById('load-tinykeys').addEventListener('click', async () => {
+        print('正在从 unpkg 加载 tinykeys ...');
+        try {
+          const tinykeys = await keyCode();
+          print('tinykeys 就绪，导出：' + Object.keys(tinykeys).join(', '));
+        } catch (err) {
+          print('加载失败：' + err.message);
+        }
+      });
 
-<body>
-  <h1>Hello World!</h1>
-</body>
-<script>
-
-</script>
-
+      print('plugins 入口已加载，可点击上方按钮。');
+    </script>
+  </body>
 </html>

@@ -1,118 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" id="viewport"
-        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>这是一个Ts+Rollup的打包模板-盲僧幼儿园出品</title>
-    <script type="module" src="../dist/index.umd.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>fastool 浏览器示例</title>
+  <!-- UMD 产物挂到全局变量 fastool 上，注意用普通 script 而非 type="module" -->
+  <script src="../dist/index.umd.js"></script>
 </head>
 
 <body>
-    <div id="app">
-        <h1 align="center">Hello 我是扫地盲僧!</h1>
-        <p align="center">为了快速开发TS插件，我封装了一个简洁版的TS打包脚手架</p>
-        <button id="set">set参数</button>
-        <button id="get">get参数</button>
-        <button id="clearCookie">清除cookie</button>
-        <button id="scroll">滚动</button>
-        <button id="fullscreen">fullscreen</button>
-        <button id="unfullscreen">unfullscreen</button>
-        <button id="param">param</button>
-        <div style="height:800px"></div>
-        <img src="./logo.svg" />
-        <!-- Target -->
-        <!-- <input id="foo" value="https://github.com/zenorocha/clipboard.js.git" /> -->
+  <div id="app">
+    <h1 align="center">fastool</h1>
+    <p align="center">零依赖的现代 JavaScript 工具库 · UMD 示例</p>
 
-        <!-- Trigger -->
-        <button class="btn" data-clipboard-target="#foo">
-            <!-- <img src="assets/clippy.svg" alt="Copy to clipboard" /> -->
-        </button>
-    </div>
+    <section>
+      <h3>数组 / 对象</h3>
+      <button id="btn-array">chunk + uniqBy + groupBy</button>
+      <button id="btn-object">get / set 路径读写</button>
+    </section>
+
+    <section>
+      <h3>字符串 / 数字</h3>
+      <button id="btn-string">camelCase + mask</button>
+      <button id="btn-number">toThousands + round</button>
+    </section>
+
+    <section>
+      <h3>时间 / URL</h3>
+      <button id="btn-time">formatDate + formatDuration</button>
+      <button id="btn-url">读写 URL 参数</button>
+    </section>
+
+    <section>
+      <h3>存储</h3>
+      <button id="btn-storage">localStorage 存对象（带过期）</button>
+      <button id="btn-cookie">Cookie 读写</button>
+    </section>
+
+    <section>
+      <h3>浏览器 / 设备</h3>
+      <button id="btn-browser">浏览器信息与视口尺寸</button>
+      <button id="btn-device">设备类型与指纹</button>
+      <button id="btn-fullscreen">进入全屏</button>
+      <button id="btn-exit-fullscreen">退出全屏</button>
+      <button id="btn-scroll">平滑滚动到底部</button>
+    </section>
+
+    <pre id="output">点击上方按钮查看结果（也会同时输出到控制台）</pre>
+
+    <img src="./logo.svg" width="220" alt="fastool" />
+  </div>
 </body>
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        const { observeProxy, getCookie, setCookie, clearCookie,
-            delCookie,
-            smoothScroll,
-            getClientHeight,
-            getClientWidth,
-            toFullScreen,
-            exitFullscreen,
-            paramsJoinUrl,
-            getBaseUrl,
-            getUrlDomain,
-            isSupportCamera,
-            getDistance,
-            Print,
-            keyCode,
-            start,
-            dayJs,
-            log,
-            copyJs,
-            importPlugin
-        } = fastool
-        const obj = { name: '爱神的箭卡萨丁', age: 34, lib: { home: 'index' } }
 
-        async function main() {
-            const myModule = await importPlugin('https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.esm-browser.js', 'vue');
-            console.log(myModule, '插件加载模块');
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const {
+      chunk, uniqBy, groupBy,
+      get, set,
+      camelCase, mask,
+      toThousands, round,
+      formatDate, formatDuration,
+      getUrlParams, setUrlParams, delUrlParams, getQueryParam,
+      setLocalStorage, getLocalStorage, delLocalStorage,
+      setCookie, getCookie, deleteCookie,
+      getBrowserInfo, getClientHeight, getClientWidth,
+      getDeviceType, getOS, getFingerprint,
+      toFullScreen, exitFullScreen, smoothScroll,
+    } = fastool;
 
-        }
-        main();
-        function handle(val) {
-            console.log(val, '回调函数')
-        }
-        let state = observeProxy(obj, handle)
-        document.getElementById('param').onclick = () => {
-            copyJs().then(res => {
-                console.log(res, 'dasasdasd')
-                let test = new ClipboardJS('.btn');
-                console.log(test, '插件')
-                test.on('success', function (e) {
-                    console.info('Action:', e.action);
-                    console.info('Text:', e.text);
-                    console.info('Trigger:', e.trigger);
-                    e.clearSelection();
-                });
+    const out = document.getElementById('output');
+    const log = (label, value) => {
+      const text = label + ' → ' + (typeof value === 'object' ? JSON.stringify(value, null, 2) : value);
+      out.textContent = text;
+      console.log(label, value);
+    };
 
-                test.on('error', function (e) {
-                    console.error('Action:', e.action);
-                    console.error('Trigger:', e.trigger);
-                });
-            })
-        }
-        document.getElementById('set').onclick = () => {
-            state.age = 32
-            console.log(obj, '原数组')
-            console.log(state, '原数组')
-        }
-        document.getElementById('get').onclick = () => {
-            console.log(state.lib.home)
-            delete state.age
-        }
+    const on = (id, fn) => {
+      const el = document.getElementById(id);
+      if (el) el.onclick = fn;
+    };
 
-        document.getElementById('scroll').onclick = () => {
-            let height = getClientWidth()
-            alert(height)
-        }
-        document.getElementById('fullscreen').onclick = () => {
-            toFullScreen()
-        }
-        document.getElementById('unfullscreen').onclick = () => {
-            exitFullscreen()
-        }
-
-
-
+    on('btn-array', () => {
+      log('chunk([1,2,3,4,5], 2)', chunk([1, 2, 3, 4, 5], 2));
+      log('uniqBy 按 id 去重', uniqBy([{ id: 1 }, { id: 1 }, { id: 2 }], 'id'));
+      log('groupBy 按 type 分组', groupBy(
+        [{ type: 'a' }, { type: 'b' }, { type: 'a' }], 'type'
+      ));
     });
+
+    on('btn-object', () => {
+      const obj = { a: { b: [{ c: 42 }] } };
+      log('get(obj, "a.b[0].c")', get(obj, 'a.b[0].c'));
+      log('set(obj, "a.d", 1)', set(obj, 'a.d', 1));
+    });
+
+    on('btn-string', () => {
+      log("camelCase('get user info')", camelCase('get user info'));
+      log("mask('13812345678', 3, 4)", mask('13812345678', 3, 4));
+    });
+
+    on('btn-number', () => {
+      log('toThousands(1234567.89)', toThousands(1234567.89));
+      log('round(1.005, 2)', round(1.005, 2));
+    });
+
+    on('btn-time', () => {
+      log("formatDate('YYYY-MM-DD HH:mm:ss')", formatDate('YYYY-MM-DD HH:mm:ss'));
+      log('formatDuration(93784000)', formatDuration(93784000));
+    });
+
+    on('btn-url', () => {
+      const url = 'https://a.com/list?x=1&y=hi';
+      log('getUrlParams', getUrlParams(url));
+      log("getQueryParam('y')", getQueryParam('y', url));
+      log("setUrlParams('id', 3)", setUrlParams('id', 3, url));
+      log("delUrlParams('x')", delUrlParams('x', url));
+    });
+
+    on('btn-storage', () => {
+      setLocalStorage('demo', { name: 'fastool', v: 1 }, 60_000);
+      log('getLocalStorage("demo")', getLocalStorage('demo'));
+      delLocalStorage('demo');
+    });
+
+    on('btn-cookie', () => {
+      setCookie('demo', 'hello', { path: '/', expire: 60000 });
+      log('getCookie("demo")', getCookie('demo'));
+      deleteCookie('demo', '/');
+    });
+
+    on('btn-browser', () => {
+      log('getBrowserInfo()', getBrowserInfo());
+      log('视口尺寸', { w: getClientWidth(), h: getClientHeight() });
+    });
+
+    on('btn-device', () => {
+      log('getOS / getDeviceType', { os: getOS(), type: getDeviceType() });
+      log('getFingerprint()', getFingerprint());
+    });
+
+    on('btn-fullscreen', () => toFullScreen());
+    on('btn-exit-fullscreen', () => exitFullScreen());
+    on('btn-scroll', () => smoothScroll(document.body.scrollHeight));
+  });
 </script>
+
 <style>
-    body {
-        background: rgb(15 23 42);
-        color: #fff;
-    }
+  body {
+    background: #0f172a;
+    color: #e2e8f0;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    margin: 0;
+    padding: 24px;
+  }
+
+  h1 { margin-bottom: 4px; }
+  h3 { margin: 20px 0 8px; font-size: 15px; color: #94a3b8; }
+
+  button {
+    margin: 4px 6px 4px 0;
+    padding: 7px 14px;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    background: #1e293b;
+    color: #e2e8f0;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  button:hover { background: #334155; }
+
+  #output {
+    margin-top: 20px;
+    padding: 14px;
+    border-radius: 8px;
+    background: #020617;
+    color: #7dd3fc;
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    min-height: 60px;
+  }
+
+  img { margin-top: 24px; }
 </style>
 
 </html>

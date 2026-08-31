@@ -1,18 +1,88 @@
 # Event
 
-## getDeviceId
-事件订阅发布及调度中心
-```typescript
-/**
- * @func mitt
- * @desc 事件订阅发布及调度中心
- * @return { Object } 事件订阅发布及调度中心
- * @github 三方库地址：https://github.com/developit/mitt
- * @example
- *    const emitter = mitt(); 
- *    emitter.on('foo', e => console.log('foo', e) )// 事件监听
- *    function onFoo() {}
- *    emitter.on('foo', onFoo)   // listen
- *    emitter.off('foo', onFoo)  // unlisten
- */
+> A zero-dependency mitt implementation, SSR-safe.
+
+Total 1 functions, 7 types.
+
+## Functions
+
+### mitt
+
+Mitt: Tiny (~200b) functional event emitter / pubsub.
+
+**Signature**
+
+```ts
+function mitt<Events extends Record<EventType, unknown>>( all?: EventHandlerMap<Events> ): Emitter<Events>
+```
+
+**Returns** `Mitt`
+
+## Types
+
+### EventType
+
+mitt event subscription/publishing and dispatch center
+
+```ts
+type EventType = string | symbol;
+```
+
+### Handler
+
+
+```ts
+type Handler<T = unknown> = (event: T) => void;
+```
+
+### WildcardHandler
+
+
+```ts
+type WildcardHandler<T = Record<string, unknown>> = (
+	type: keyof T,
+	event: T[keyof T]
+) => void;
+```
+
+### EventHandlerList
+
+
+```ts
+type EventHandlerList<T = unknown> = Array<Handler<T>>;
+```
+
+### WildCardEventHandlerList
+
+
+```ts
+type WildCardEventHandlerList<T = Record<string, unknown>> = Array<WildcardHandler<T>>;
+```
+
+### EventHandlerMap
+
+
+```ts
+type EventHandlerMap<Events extends Record<EventType, unknown>> = Map<
+	keyof Events | '*',
+	EventHandlerList<Events[keyof Events]> | WildCardEventHandlerList<Events>
+>;
+```
+
+### Emitter
+
+
+```ts
+interface Emitter<Events extends Record<EventType, unknown>> {
+	all: EventHandlerMap<Events>;
+
+	on<Key extends keyof Events>(type: Key, handler: Handler<Events[Key]>): void;
+	on(type: '*', handler: WildcardHandler<Events>): void;
+
+	off<Key extends keyof Events>(type: Key, handler?: Handler<Events[Key]>): void;
+	off(type: '*', handler: WildcardHandler<Events>): void;
+
+	emit<Key extends keyof Events>(type: Key, event: Events[Key]): void;
+	emit<Key extends keyof Events>(type: undefined extends Events[Key] ? Key : never): void;
+}
 ```

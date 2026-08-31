@@ -1,17 +1,21 @@
 /**
  * @func openNewTag
- * @param {String} url
- * @param {Number} tagType?
+ * @desc Open a URL in a new window / tab
+ * @param {string} url target URL
+ * @param {number} tagType how to open: 1 new tab (default), 2 fixed-size popup window
  * @returns {void}
- * @desc 打开新标签页
+ * @example openNewTag('https://example.com');
+ * @example openNewTag('https://example.com', 2);
  */
-export function openNewTag(url: string, tagType: number = 1) {
-  // 新建标签页打开
-  if (tagType == 1) {
+export function openNewTag(url: string, tagType: number = 1): void {
+  if (typeof window === 'undefined' || !url) return;
+  if (tagType === 1) {
     window.open(url, '_blank');
-  } else if (tagType == 2) {  //新建无状态小窗口打开
-    window.open(url, "_blank", "width=800,height=600,top=150,left=300,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,modal=false,alwaysRaised=yes");
-  } else { // UUOA内嵌页面打开
-    // todo
+  } else if (tagType === 2) {
+    window.open(
+      url,
+      '_blank',
+      'width=800,height=600,top=150,left=300,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes'
+    );
   }
 }

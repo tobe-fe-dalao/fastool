@@ -2,9 +2,9 @@
  * @func dataURLtoFile
  * @param {string} dataUrl
  * @param {string} fileName
- * @desc  将dataUrl转换为文件
- * ie无法使用new File构造函数，建议使用dataURLtoBlob
- * @return {any} 文件对象
+ * @desc  Convert a dataUrl to a file
+ * IE cannot use the new File constructor; use dataURLtoBlob instead
+ * @return {any} file object
  * @example let file = dataURLtoFile(dataUrl, fileName)
  */
 export const dataURLtoFile = (dataUrl: string, fileName: string = getFileName()): any => {
@@ -22,8 +22,8 @@ export const dataURLtoFile = (dataUrl: string, fileName: string = getFileName())
  * @func base64toFile
  * @param {string} base64
  * @param {string} fileName
- * @desc  将base64转换为文件
- * @returns {any} 文件对象
+ * @desc  Convert base64 to a file
+ * @returns {any} file object
  * @example let file = base64toFile(base64, fileName)
  */
 export const base64toFile = (base64: string, fileName: string = getFileName()): any => {
@@ -31,8 +31,8 @@ export const base64toFile = (base64: string, fileName: string = getFileName()): 
 }
 /**
  * @func getFileName
- * @desc 设置文件名字
- * @return { string } fileName 文件名
+ * @desc Set the file name
+ * @return { string } fileName file name
  * @example let fileName = getFileName();
  */
 function getFileName() {
@@ -45,7 +45,7 @@ function getFileName() {
 /**
  * @func dataURLtoBlob
  * @param { string } dataurl
- * @desc 将dataUrl/base64转换为blob
+ * @desc Convert a dataUrl/base64 to a blob
  * @return { Blob } Blob
  * @example let blob = dataURLtoBlob(dataurl)
  */
@@ -73,7 +73,7 @@ export const dataURLtoBlob = (dataurl: string): Blob | null => {
 /**
  * @func base64toBlob
  * @param { string } base64
- * @desc 将base64转换为blob
+ * @desc Convert base64 to a blob
  * @return { Blob } Blob
  * @example let blob = base64toBlob(dataurl)
  */
@@ -84,8 +84,8 @@ export const base64toBlob = (base64: string): Blob | null => {
  * @func blobtoFile
  * @param { Blob } blob
  * @param { string } fileName
- * @desc 将blob转换为文件
- * @return { any } 文件对象
+ * @desc Convert a blob to a file
+ * @return { any } file object
  * @example let file = blobtoFile(blob, filename)
  */
 export const blobtoFile = (blob: Blob, fileName: string = getFileName()): any => {
@@ -93,9 +93,9 @@ export const blobtoFile = (blob: Blob, fileName: string = getFileName()): any =>
 };
 /**
  * @func filetoBase64
- * @param file 文件对象
- * @desc 文件对象转base64
- * @return { Promise } Promise对象，异步处理
+ * @param file file object
+ * @desc Convert a file object to base64
+ * @return { Promise } Promise object, asynchronous
  */
 export const filetoBase64 = (file: any): Promise<any> => {
   // return window.URL.createObjectURL(file)

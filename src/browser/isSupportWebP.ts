@@ -1,9 +1,14 @@
 /**
  * @func isSupportWebP
- * @desc 判断浏览器是否支持webP格式图片
+ * @desc Check whether the browser supports WebP image format (returns false under SSR)
  * @returns {boolean}
- * @example if (isSupportWebP()) {...}
+ * @example if (isSupportWebP()) { img.src = 'a.webp' }
  */
 export const isSupportWebP = (): boolean => {
-  return !![].map && document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') == 0;
-}
+  if (typeof document === 'undefined') return false;
+  try {
+    return document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0;
+  } catch {
+    return false;
+  }
+};

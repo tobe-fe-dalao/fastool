@@ -1,103 +1,176 @@
 # Regex
 
+> Common validation patterns and helpers.
 
-## isChines
-是否是中文
-```typescript
-/**
- * @func isChines
- * @desc 是否是中文
- * @param { string } str 需要判断的数据
- * @return { boolean } 是否是中文
- * @example if (isChines(str)) { doSomething }
- */
+Total 9 functions.
+
+## Functions
+
+### isChines
+
+Check whether the string is Chinese
+
+**Signature**
+
+```ts
+const isChines = (str: string): boolean
 ```
-## isCard
-是否为身份证号: 支持（1/2）代，15位或18位
-```typescript
-/**
- * @func isCard
- * @desc 是否为身份证号: 支持（1/2）代，15位或18位
- * @param { string } str 需要判断的数据
- * @param { number } type 1: 15位；2: 18位；默认0：同事匹配15位和18位
- * @return { boolean } 是否为身份证号
- * @example if (isCard(str)) { doSomething }
- */
+
+**Parameters**
+
+| Param | Type | Description |
+| --- | --- | --- |
+| `str` | `string` |  |
+
+**Returns** `boolean`
+
+### isIdCard
+
+Check whether it is an ID card number: supports 1st/2nd generation, 15 or 18 digits
+
+**Signature**
+
+```ts
+const isIdCard = (str: string, type: number = 0): boolean
 ```
-## isPostCode
-校验是否是大陆邮政编码
-```typescript
-/**
- * @func isPostCode
- * @desc 校验是否是大陆邮政编码
- * @param { number } value 需要判断的数据
- * @return { boolean } 是否是大陆邮政编码
- * @example if (isPostCode(str)) { doSomething }
- */
+
+**Parameters**
+
+| Param | Type | Description |
+| --- | --- | --- |
+| `str` | `string` | ID card number |
+| `type` | `number` | 1: 15-digit, 2: 18-digit, default 0 matches both 15 and 18 digits |
+
+**Returns** `boolean`
+
+### isPostCode
+
+Validate whether it is a mainland China postal code
+
+**Signature**
+
+```ts
+const isPostCode = (value: number): boolean
 ```
-## isIPv6
-校验是否是IPv6地址
-```typescript
-/**
- * @func isIPv6
- * @desc 校验是否是IPv6地址
- * @param { string } str 需要判断的数据
- * @return { boolean } 是否是IPv6地址
- * @example if (isIPv6(str)) { doSomething }
- */
+
+**Parameters**
+
+| Param | Type | Description |
+| --- | --- | --- |
+| `value` | `number` |  |
+
+**Returns** `boolean`
+
+### isIPv6
+
+Validate whether it is an IPv6 address
+
+**Signature**
+
+```ts
+const isIPv6 = (str: string): boolean
 ```
-## isEmail
-是否是邮箱
-```typescript
-/**
- * @func isEmail
- * @desc 是否是邮箱
- * @param { string } value 需要判断的数据
- * @return { boolean } 是否是邮箱
- * @example if (isEmail(str)) { doSomething }
- */
+
+**Parameters**
+
+| Param | Type | Description |
+| --- | --- | --- |
+| `str` | `string` |  |
+
+**Returns** `boolean`
+
+### isEmail
+
+Check whether it is an email
+
+**Signature**
+
+```ts
+const isEmail = (value: string): boolean
 ```
-## isTelNumber
-是否是手机号
-```typescript
-/**
- * @func isTelNumber
- * @desc 是否是手机号
- * @param { string } str 需要判断的数据
- * @return { boolean } 是否是手机号
- * @example if (isTelNumber(str)) { doSomething }
- */
+
+**Parameters**
+
+| Param | Type | Description |
+| --- | --- | --- |
+| `value` | `string` |  |
+
+**Returns** `boolean`
+
+### isTelNumber
+
+Check whether it is a mobile phone number
+
+**Signature**
+
+```ts
+const isTelNumber = (str: string): boolean
 ```
-## isHasEmoji
-是否包含emoji表情
-```typescript
-/**
- * @func isHasEmoji
- * @desc 是否包含emoji表情
- * @param { string } value 需要判断的数据
- * @return { boolean } 是否包含emoji表情
- * @example if (isHasEmoji(str)) { doSomething }
- */
+
+**Parameters**
+
+| Param | Type | Description |
+| --- | --- | --- |
+| `str` | `string` |  |
+
+**Returns** `boolean`
+
+### isHasEmoji
+
+Check whether it contains emoji
+
+**Signature**
+
+```ts
+const isHasEmoji = (value: string): boolean
 ```
-## isUrl
-校验是否是URL
-```typescript
-/**
- * @func isUrl
- * @desc 校验是否是URL
- * @param { string } value 需要判断的数据
- * @return { boolean } 校验是否是URL
- * @example if (isUrl(str)) { doSomething }
- */
+
+**Parameters**
+
+| Param | Type | Description |
+| --- | --- | --- |
+| `value` | `string` |  |
+
+**Returns** `boolean`
+
+### isUrl
+
+Validate whether it is a URL
+
+**Signature**
+
+```ts
+const isUrl = (str: string): boolean
 ```
-## isColor
-判断字符串是否是十六进制的颜色值
-```typescript
-/**
- * @func isColor
- * @desc 判断字符串是否是十六进制的颜色值
- * @param {string} value 需要判断的数据
- * @returns {boolean} 校验是否是十六进制的颜色值
- * @example if (isColor(str)) { doSomething }
- */
+
+**Parameters**
+
+| Param | Type | Description |
+| --- | --- | --- |
+| `str` | `string` |  |
+
+**Returns** `boolean`
+
+### isColor
+
+Check whether a string is a hex color value
+
+**Signature**
+
+```ts
+const isColor = function (value: string): boolean
+```
+
+**Parameters**
+
+| Param | Type | Description |
+| --- | --- | --- |
+| `value` | `string` | value to check |
+
+**Returns** `boolean` whether it is a hex color value
+
+**Example**
+
+```ts
+if (isColor(str)) { doSomething }
 ```

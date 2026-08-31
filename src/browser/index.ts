@@ -5,5 +5,7 @@ export * from './scrollToTop';
 export * from './scrollToBottom';
 export * from './smoothScroll';
 export * from './getClientHeight';
+export * from './getClientWidth';
 export * from './toFullScreen';
 export * from './exitFullscreen';
+export * from './openNewTag';

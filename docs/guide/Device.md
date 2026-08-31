@@ -1,52 +1,188 @@
 # Device
-## getOS
-🧿获取操作系统类型
-```typescript
-/**
- * @func getOS
- * @desc  获取操作系统类型
- * @return { string } 操作系统
- * @example const device = getOS()
- */
+
+> Device type and OS detection from UA, zero dependencies.
+
+Total 10 functions.
+
+## Functions
+
+### getOS
+
+Get the operating system type
+
+**Signature**
+
+```ts
+const getOS = (): string
 ```
-## isWeiXin
-🧿是否是微信
-```typescript
-/**
- * @func isWeiXin
- * @desc  是否是微信
- * @return { boolean } 是否微信
- * @example const iswx = isWeiXin()
- */
+
+**Returns** `String` OS type: 'Windows Phone' \| 'Symbian' \| 'Tablet' \| 'Ios' \| 'Android' \| 'FireFox' \| 'Chrome' \| 'Pc' \| 'unknown'
+
+**Example**
+
+```ts
+getOS() // 'Pc'
 ```
-## isMobile
-🧿是否是移动端
-```typescript
-/**
- * @func isMobile
- * @desc  是否是移动端
- * @return { boolean } 是否移动端
- * @example const ismobile = isMobile()
- */
+
+### isWeiXin
+
+Whether running inside the WeChat built-in browser
+
+**Signature**
+
+```ts
+const isWeiXin = (): boolean
 ```
-## isSupportCamera
-🧿是否支持摄像头
-```typescript
-/**
- * @func isSupportCamera
- * @desc  是否支持摄像头
- * @return { boolean } 是否支持摄像头
- * @example const iscamera = isSupportCamera()
- */
+
+**Returns** `Boolean`
+
+**Example**
+
+```ts
+isWeiXin()
 ```
-## getDeviceId
-🧿生成设备唯一ID
-```typescript
-/**
- * @func getDeviceId
- * @desc  生成设备唯一ID
- * @return { Promise } 设备唯一ID
- * @github 三方库地址：https://github.com/fingerprintjs/fingerprintjs
- * @example const iscamera = getDeviceId()
- */
+
+### isMobile
+
+Whether the current device is mobile
+
+**Signature**
+
+```ts
+const isMobile = (): boolean
+```
+
+**Returns** `Boolean`
+
+**Example**
+
+```ts
+isMobile()
+```
+
+### isIOS
+
+Whether the device is iOS (including iPadOS masquerading as macOS)
+
+**Signature**
+
+```ts
+const isIOS = (): boolean
+```
+
+**Returns** `Boolean`
+
+**Example**
+
+```ts
+isIOS()
+```
+
+### isAndroid
+
+Whether the device is Android
+
+**Signature**
+
+```ts
+const isAndroid = (): boolean
+```
+
+**Returns** `Boolean`
+
+**Example**
+
+```ts
+isAndroid()
+```
+
+### isTablet
+
+Whether the device is a tablet
+
+**Signature**
+
+```ts
+const isTablet = (): boolean
+```
+
+**Returns** `Boolean`
+
+**Example**
+
+```ts
+isTablet()
+```
+
+### getDeviceType
+
+Get the broad device category
+
+**Signature**
+
+```ts
+const getDeviceType = (): 'mobile' | 'tablet' | 'desktop'
+```
+
+**Returns** `'mobile' \| 'tablet' \| 'desktop'` device type
+
+**Example**
+
+```ts
+getDeviceType() // 'desktop'
+```
+
+### isSupportCamera
+
+Whether a camera is supported (async version; accurately detects a video input device)
+
+**Signature**
+
+```ts
+const isSupportCamera = async (): Promise<boolean>
+```
+
+**Returns** `Promise<Boolean>` whether supported
+
+**Example**
+
+```ts
+await isSupportCamera()
+```
+
+### getFingerprint
+
+Generate a device fingerprint based on browser environment characteristics
+
+**Signature**
+
+```ts
+const getFingerprint = (): string
+```
+
+**Returns** `String` the device fingerprint (a 32-character hexadecimal string)
+
+**Example**
+
+```ts
+getFingerprint() // 'a1b2c3d4e5f60718...'
+```
+
+### getDeviceId
+
+Get a unique device ID (async).
+
+**Signature**
+
+```ts
+const getDeviceId = async (): Promise<string>
+```
+
+**Returns** `Promise<String>` the device ID
+
+**Example**
+
+```ts
+
+const id = await getDeviceId()
 ```

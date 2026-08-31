@@ -1,46 +1,49 @@
 /**
- * 判断是否为空对象
- * @param obj 参数
+ * Check whether the value is an empty object
+ * @param obj parameter
  * @returns {boolean}
  */
 
 const isObj = (obj: any): boolean => {
-  return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
-}
+  return obj !== null && typeof obj === 'object' && !Array.isArray(obj);
+};
 /**
  * @func mergeObject
- * @param {object} obj1 外部的参数对象
- * @param {object} obj2 默认参数对象
- * @desc 深拷贝合并对象
+ * @param {object} obj1 outer parameter object
+ * @param {object} obj2 default parameter object
+ * @desc Deep-merge objects
  * @returns {Object}
  * @example mergeObject(obj1, obj2)
  */
-export const mergeObject = (obj1: any, obj2: Object): Object => {
-  // 如果没有传参，返回默认值
+export const mergeObject = <T extends Record<string, any> = Record<string, any>>(
+  obj1: any,
+  obj2: Record<string, any>
+): T => {
+  // If no argument is passed, return the default value
   if (!isObj(obj1)) {
-    return mergeObject({}, obj2);
+    return mergeObject<T>({}, obj2);
   }
-  // 如果没有默认，返回传参
+  // If no default, return the passed argument
   if (!isObj(obj2)) {
-    return mergeObject({}, obj1);
+    return mergeObject<T>({}, obj1);
   }
-  // 定义一个以默认值为基础的新对象
-  let newObj = Object.assign({}, obj2)
-  // 遍历传参对象
+  // Define a new object based on the defaults
+  const newObj: Record<string, any> = Object.assign({}, obj2);
+  // Iterate over the passed-in object
   Object.keys(obj1).forEach(function (key) {
-    let val = obj1[key]
+    let val = obj1[key];
     if (key === '__proto__' || key === 'constructor') {
-      return
+      return;
     }
     if (val === null) {
-      return
+      return;
     }
-    // 如果传参对象中的值为对象，则递归调用
+    // If a value in the passed object is itself an object, recurse
     if (isObj(val) && isObj(newObj[key])) {
-      newObj[key] = mergeObject(val, newObj[key])
+      newObj[key] = mergeObject(val, newObj[key]);
     } else {
-      newObj[key] = val
+      newObj[key] = val;
     }
-  })
-  return newObj
-}
+  });
+  return newObj as T;
+};

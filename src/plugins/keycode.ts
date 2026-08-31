@@ -1,25 +1,28 @@
-import importPlugin from './importPlugin'
+import importPlugin from './importPlugin';
+
 /**
  * @func keyCode
- * @desc 监听键盘按键类库
+ * @desc Load tinykeys for listening to key combinations
+ * @param {string} cdnUrl optional; custom CDN URL for tinykeys
+ * @returns {Promise<ITinyKey>} tinykeys module
  * @github https://github.com/jamiebuilds/tinykeys
- * @example keyCode(window, {
- * "Shift+D": () => {
- * alert("The 'Shift' and 'd' keys were pressed at the same time")
- * },
+ * @size 1kb
+ * @example
+ * const tinykeys = await keyCode();
+ * tinykeys.createKeybindingsHandler({ 'Shift+D': () => alert('shift + d') });
  */
-// 注入模块的声明定义 需要自己定义修改
-interface ITinyKey {
-  default: any
-  createKeybindingsHandler: (options: any) => Function
-  parseKeybinding: (keyName: string) => Array<any>
-}
-const keyCode = async () => {
-  return await importPlugin(
-    'https://unpkg.com/tinykeys@latest/dist/tinykeys.module.js',
-    'tinykeys',
-  )
-}
-export default keyCode
 
+// Declaration definitions for the injected module; you may need to define/modify them yourself
+export interface ITinyKey {
+  default: any;
+  createKeybindingsHandler: (options: any) => Function;
+  parseKeybinding: (keyName: string) => Array<any>;
+}
 
+const DEFAULT_CDN = 'https://unpkg.com/tinykeys@latest/dist/tinykeys.module.js';
+
+const keyCode = async (cdnUrl: string = DEFAULT_CDN): Promise<ITinyKey> => {
+  return (await importPlugin('tinykeys', cdnUrl)) as ITinyKey;
+};
+
+export default keyCode;

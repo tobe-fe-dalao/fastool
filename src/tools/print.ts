@@ -2,7 +2,7 @@
  * @func Print
  * @param {string} selector
  * @param {any} options
- * @desc  打印
+ * @desc  Print
  * @example Print('#print', {})
  */
 class Print {
@@ -29,7 +29,7 @@ class Print {
     let content = this.getStyle() + this.getHtml();
     this.writeIframe(content);
   }
-  extend(obj: object, obj2: object) {
+  extend(obj: Record<string, any>, obj2: Record<string, any>) {
     for (let k in obj2) {
       obj[k] = obj2[k];
     }
@@ -89,17 +89,17 @@ class Print {
         }
       }
     }
-    // 包裹要打印的元素
+    // Wrap the element to be printed
     // fix: https://github.com/xyl66/vuePlugs_printjs/issues/36
     let outerHTML = this.wrapperRefDom(this.rootEl).outerHTML;
     return outerHTML;
   }
-  // 向父级元素循环，包裹当前需要打印的元素
-  // 防止根级别开头的 css 选择器不生效
+    // Walk up the parent chain, wrapping the element currently to be printed
+    // Prevent root-level CSS selectors from not taking effect
   wrapperRefDom(refDom: any) {
     let prevDom = null;
     let currDom = refDom;
-    // 判断当前元素是否在 body 中，不在文档中则直接返回该节点
+    // check whether the current element is inside body; if not in the document, return the node directly
     if (!this.isInBody(currDom)) return currDom;
 
     while (currDom) {
@@ -158,14 +158,14 @@ class Print {
       console.log("err", err);
     }
   }
-  // 检查一个元素是否是 body 元素的后代元素且非 body 元素本身
+  // check whether an element is a descendant of body and not body itself
   isInBody(node: any) {
     return node === document.body ? false : document.body.contains(node);
   }
 };
 // const MyPlugin = {};
 // MyPlugin.install = function (Vue, options) {
-//   // 4. 添加实例方法
+//   // 4. add instance method
 //   Vue.prototype.$print = Print;
 // };
 export default Print;

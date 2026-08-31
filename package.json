@@ -1,72 +1,104 @@
 {
-    "name": "fastool",
-    "version": "0.1.8",
-    "description": "一个短小而精悍的现代JavaScript使用工具库",
-    "main": "dist/index.cjs.js",
-    "module": "dist/index.esm.js",
-    "unpkg": "dist/index.umd.js",
-    "jsdelivr": "dist/index.umd.js",
-    "types": "dist/index.d.ts",
-    "jsname": "fastool",
-    "scripts": {
-        "dev": " cross-env NODE_ENV=dev rollup -c -w",
-        "build": "rimraf dist && cross-env NODE_ENV=production rollup -c",
-        "release": "pnpx semantic-release",
-        "docs:dev": "vitepress dev docs",
-        "docs:build": "vitepress build docs",
-        "docs:serve": "vitepress serve docs"
+  "name": "fastool",
+  "version": "1.0.0",
+  "description": "A compact, modern JavaScript utility library with zero runtime dependencies, written in TypeScript, supporting ESM / CJS / UMD.",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "unpkg": "dist/index.umd.min.js",
+  "jsdelivr": "dist/index.umd.min.js",
+  "types": "dist/index.d.ts",
+  "jsname": "fastool",
+  "packageManager": "pnpm@11.16.0",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.mjs"
     },
-    "homepage": "",
-    "bugs": "https://github.com/tobe-fe-dalao/fastool/issues",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/tobe-fe-dalao/fastool.git"
+    "./plugins": {
+      "types": "./dist/plugins.d.ts",
+      "import": "./dist/plugins.mjs",
+      "require": "./dist/plugins.cjs",
+      "default": "./dist/plugins.mjs"
     },
-    "author": "BlindMonk",
-    "license": "Apache-2.0",
-    "files": [
-        "dist",
-        "types",
-        "index.js"
-    ],
-    "keywords": [
-        ""
-    ],
-    "devDependencies": {
-        "@babel/core": "^7.21.0",
-        "@babel/plugin-transform-runtime": "^7.21.0",
-        "@babel/preset-env": "^7.20.2",
-        "@babel/runtime": "^7.21.0",
-        "@rollup/plugin-commonjs": "^16.0.0",
-        "@rollup/plugin-eslint": "^8.0.5",
-        "@rollup/plugin-json": "^4.1.0",
-        "@rollup/plugin-node-resolve": "^10.0.0",
-        "@rollup/plugin-typescript": "^6.1.0",
-        "@typescript-eslint/parser": "^4.33.0",
-        "babel-plugin-external-helpers": "^6.22.0",
-        "babel-preset-latest": "^6.24.1",
-        "eslint": "^7.32.0",
-        "eslint-plugin-prettier": "^3.4.1",
-        "prettier": "^2.8.4",
-        "rollup": "^2.79.1",
-        "rollup-plugin-babel": "^4.4.0",
-        "rollup-plugin-delete": "^2.0.0",
-        "rollup-plugin-dts": "^3.0.2",
-        "rollup-plugin-livereload": "^2.0.5",
-        "rollup-plugin-serve": "^1.1.0",
-        "rollup-plugin-styles": "^4.0.0",
-        "rollup-plugin-terser": "^7.0.2",
-        "rollup-plugin-typescript2": "^0.30.0",
-        "tslib": "^2.5.0",
-        "typescript": "^4.9.5",
-        "vitepress": "1.0.0-alpha.47"
+    "./polyfill": {
+      "types": "./dist/polyfill.d.ts",
+      "import": "./dist/polyfill.mjs",
+      "require": "./dist/polyfill.cjs",
+      "default": "./dist/polyfill.mjs"
     },
-    "dependencies": {
-        "@rollup/plugin-replace": "^5.0.2",
-        "@types/node": "^17.0.45",
-        "cross-env": "^7.0.3",
-        "rimraf": "^4.1.2",
-        "rollup-plugin-gzip": "^3.1.0",
-        "rollup-plugin-uglify": "^6.0.4"
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "plugins": [
+        "dist/plugins.d.ts"
+      ],
+      "polyfill": [
+        "dist/polyfill.d.ts"
+      ]
     }
+  },
+  "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rimraf dist && rollup -c",
+    "typecheck": "tsc --noEmit",
+    "test": "pnpm run build && node --test \"test/**/*.test.mjs\"",
+    "prepublishOnly": "pnpm run build",
+    "docs": "vitepress dev docs",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs",
+    "docs:preview": "vitepress build docs && vitepress preview docs"
+  },
+  "homepage": "https://tobe-fe-dalao.github.io/fastool/",
+  "bugs": "https://github.com/tobe-fe-dalao/fastool/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tobe-fe-dalao/fastool.git"
+  },
+  "author": "BlindMonk",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "utils",
+    "utilities",
+    "toolkit",
+    "tools",
+    "javascript",
+    "typescript",
+    "zero-dependency",
+    "tree-shakeable",
+    "esm",
+    "cjs",
+    "umd",
+    "browser",
+    "frontend",
+    "helper",
+    "fastool"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.4",
+    "@types/node": "^22.15.3",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.41.1",
+    "rollup-plugin-dts": "^6.2.1",
+    "tslib": "^2.8.1",
+    "typescript": "^5.8.3",
+    "vitepress": "^1.6.0"
+  }
 }

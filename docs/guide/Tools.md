@@ -1,13 +1,32 @@
 # Tools
-## Print
-打印
-```typescript
-/**
- * @Class Print
- * @desc  打印
- * @param { string } selector 选择器
- * @param { any } options 参数
- * @return { Object } { d, h, m, s } 天 时 分 秒
- * @example Print('#print', {})
- */
+
+> Misc helpers such as printing.
+
+Total 1 functions.
+
+## Functions
+
+### Print
+
+Print
+
+**Signature**
+
+```ts
+class Print {
+  constructor(selector: string, options: any)
+}
+```
+
+**Parameters**
+
+| Param | Type | Description |
+| --- | --- | --- |
+| `selector` | `string` |  |
+| `options` | `any` |  |
+
+**Example**
+
+```ts
+Print('#print', {})
 ```

@@ -1,21 +1,33 @@
 {
   "compilerOptions": {
-    "target": "es6", // 编译后的es版本
-    "module": "esnext", // 前端模块化规范
-    "allowJs": true, // 允许引入js文件
-    "strict": true, // 开启严格模式
-    "baseUrl": "./",
-    "importHelpers": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+
+    "strict": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleDetection": "force",
+    "useDefineForClassFields": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "suppressImplicitAnyIndexErrors": true,
     "resolveJsonModule": true,
+    "importHelpers": true,
+    "skipLibCheck": true,
+
     "sourceMap": true,
-    "declaration": true,
-    "lib": ["ES2015", "DOM", "es5", "es2015.promise", "es2015", "es2017", "esnext"]
+    "declaration": false,
+    "declarationMap": false,
+    "outDir": "dist",
+
+    // fastool 是浏览器优先的库：不引入 node 类型，避免与 DOM 的 setTimeout 等声明冲突
+    "types": []
   },
-  "exclude": ["node_modules/**"],
-  "include": ["src/**/*", "index.ts"]
+  "include": ["src/**/*.ts", "index.ts"],
+  "exclude": ["node_modules", "dist", "docs", "examples", "test"]
 }

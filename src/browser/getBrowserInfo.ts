@@ -1,34 +1,25 @@
 /**
  * @func getBrowserInfo
- * @returns {String} 浏览器类型和版本
- * @desc 📝 获取浏览器类型和版本
- * @example const browserInfo = getBrowserInfo();
+ * @desc Get the browser type and version (returns unknown under SSR)
+ * @returns {{ type: string, version: number }} browser info
+ * @example getBrowserInfo() // { type: 'Chrome', version: 120 }
  */
-export const getBrowserInfo = (): object => {
-  let t = navigator.userAgent.toLowerCase() as any;
-  return 0 <= t.indexOf("msie") ? { //ie < 11
-    type: "IE",
-    version: Number(t.match(/msie ([\d]+)/)[1])
-  } : !!t.match(/trident\/.+?rv:(([\d.]+))/) ? { // ie 11
-    type: "IE",
-    version: 11
-  } : 0 <= t.indexOf("edge") ? {
-    type: "Edge",
-    version: Number(t!.match(/edge\/([\d]+)/)[1])
-  } : 0 <= t.indexOf("firefox") ? {
-    type: "Firefox",
-    version: Number(t.match(/firefox\/([\d]+)/)[1])
-  } : 0 <= t.indexOf("chrome") ? {
-    type: "Chrome",
-    version: Number(t.match(/chrome\/([\d]+)/)[1])
-  } : 0 <= t.indexOf("opera") ? {
-    type: "Opera",
-    version: Number(t.match(/opera.([\d]+)/)[1])
-  } : 0 <= t.indexOf("Safari") ? {
-    type: "Safari",
-    version: Number(t.match(/version\/([\d]+)/)[1])
-  } : {
-    type: t,
-    version: -1
-  }
-}
+export const getBrowserInfo = (): { type: string; version: number } => {
+  if (typeof navigator === 'undefined') return { type: 'unknown', version: -1 };
+
+  const ua = navigator.userAgent.toLowerCase();
+  const pick = (reg: RegExp): number => {
+    const result = ua.match(reg);
+    return result ? Number(result[1]) : -1;
+  };
+
+  if (ua.includes('msie')) return { type: 'IE', version: pick(/msie ([\d]+)/) };
+  if (ua.match(/trident\/.+?rv:[\d.]+/)) return { type: 'IE', version: 11 };
+  if (ua.includes('edg')) return { type: 'Edge', version: pick(/edg\/([\d]+)/) };
+  if (ua.includes('edge')) return { type: 'Edge', version: pick(/edge\/([\d]+)/) };
+  if (ua.includes('firefox')) return { type: 'Firefox', version: pick(/firefox\/([\d]+)/) };
+  if (ua.includes('opr')) return { type: 'Opera', version: pick(/opr\/([\d]+)/) };
+  if (ua.includes('chrome')) return { type: 'Chrome', version: pick(/chrome\/([\d]+)/) };
+  if (ua.includes('safari')) return { type: 'Safari', version: pick(/version\/([\d]+)/) };
+  return { type: 'unknown', version: -1 };
+};

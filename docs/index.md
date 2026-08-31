@@ -2,27 +2,34 @@
 layout: home
 
 title: FasTool
-titleTemplate: 一个短小而精悍的现代JavaScript使用工具库
+titleTemplate: A zero-dependency modern JavaScript utility library
 
 hero:
   name: FasTool
-  text: 一个短小而精悍的现代JavaScript使用工具库
+  text: A zero-dependency modern JavaScript utility library
+  tagline: 265 exports · ESM / CJS / UMD · SSR-safe · zero runtime dependencies
   actions:
     - theme: brand
       text: Get Started
+      link: /guide/start
+    - theme: alt
+      text: Documentation
       link: /guide/
     - theme: alt
-      text: View on GitHub
+      text: GitHub
       link: https://github.com/tobe-fe-dalao/fastool
 
 features:
-  - title: TypeScript
-    details: 基于 TypeScript 编写，Rollup打包的一款现代 JS 函数类库 
-  - title: ES6+
-    details: 适用于现代浏览器，基于ES6+的JavaScript规范，聚焦业务而非fn
-  - title: Convenient
-    details: 包含动态插件库，可以随时调用，做随手可得且最全的工具库
-  - title: More
-    details: 加入我们，更多能力等你挖掘....  
-   
+  - title: Zero runtime dependencies
+    details: The main entry includes no third-party libraries and never pulls remote URLs at build time. Every function is implemented with native JS.
+  - title: Multiple output formats
+    details: Ships ESM / CJS / UMD simultaneously, auto-selected via exports conditions. sideEffects is declared to enable tree-shaking.
+  - title: SSR-safe
+    details: Functions touching window / document / navigator are guarded by environment checks; on the server they return safe values instead of throwing.
+  - title: Full types
+    details: Written in TypeScript strict mode. Type declarations are published with the package — no need to install @types separately.
+  - title: Docs stay in sync with code
+    details: Category docs are generated directly from source JSDoc via `pnpm docs:gen`. Edit a comment and regenerate.
+  - title: Opt-in extras
+    details: CDN plugins and legacy-browser polyfills are split into separate sub-entries; you only pay for what you import.
 ---

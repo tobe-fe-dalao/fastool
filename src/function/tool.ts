@@ -1,188 +1,252 @@
 /**
- * @func throttle
- * @desc 函数节流，每隔一段时间执行一次，防止函数过于频繁调用，导致性能问题
- * @param {Function} fn 将要处理的函数
- * @param {number} wait 时间, 单位为毫秒
- * @returns 节流函数
- * @example throttle(fn, wait)
+ * Type of a wrapped function with a cancel method
  */
-export const throttle = (fn: Function, wait: number = 300): Function => {
-  let isRunning = false;
-  return (...args: any[]) => {
-    if (isRunning) return;
-    isRunning = true;
-    setTimeout(() => {
-      fn(...args);
-      isRunning = false;
-    }, wait);
-  }
+export interface ControlledFunction<F extends (...args: any[]) => any> {
+  (...args: Parameters<F>): void;
+  /** Cancel a pending invocation */
+  cancel(): void;
+}
+
+/**
+ * @func throttle
+ * @desc Throttle a function: execute at most once within wait ms, for high-frequency events like scroll and resize
+ * @param {Function} fn function to throttle
+ * @param {number} wait time interval in ms, default 300
+ * @param {object} options leading: whether to invoke the first call immediately (default true); trailing: whether to fire once more after the end (default true)
+ * @returns {ControlledFunction} throttled function, with a cancel method
+ * @example
+ * const onScroll = throttle(() => console.log('scroll'), 200);
+ * window.addEventListener('scroll', onScroll);
+ * onScroll.cancel(); // cancel
+ */
+export function throttle<F extends (...args: any[]) => any>(
+  fn: F,
+  wait = 300,
+  options: { leading?: boolean; trailing?: boolean } = {}
+): ControlledFunction<F> {
+  const { leading = true, trailing = true } = options;
+  let timer: ReturnType<typeof setTimeout> | null = null;
+  let lastExecTime = 0;
+  let lastArgs: Parameters<F> | null = null;
+  let lastThis: unknown = null;
+
+  const invoke = () => {
+    lastExecTime = Date.now();
+    timer = null;
+    if (lastArgs) {
+      fn.apply(lastThis, lastArgs);
+      lastArgs = null;
+      lastThis = null;
+    }
+  };
+
+  const throttled = function (this: unknown, ...args: Parameters<F>) {
+    const now = Date.now();
+    // when leading is false, the first call is not executed immediately but deferred until after wait
+    if (!lastExecTime && !leading) lastExecTime = now;
+
+    const remaining = wait - (now - lastExecTime);
+    if (remaining <= 0) {
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+      lastExecTime = now;
+      fn.apply(this, args);
+    } else if (!timer && trailing) {
+      lastArgs = args;
+      lastThis = this;
+      timer = setTimeout(invoke, remaining);
+    }
+  };
+
+  return Object.assign(throttled, {
+    cancel() {
+      if (timer) clearTimeout(timer);
+      timer = null;
+      lastExecTime = 0;
+      lastArgs = null;
+      lastThis = null;
+    },
+  });
 }
 
 /**
  * @func debounce
- * @desc 防抖函数 
- * 与throttle不同的是，debounce保证一个函数在多少毫秒内不再被触发，只会执行一次，
- * 要么在第一次调用return的防抖函数时执行，要么在延迟指定毫秒后调用。
- * @param {function} fn 将要处理的函数
- * @param {number} wait 时间, 单位为毫秒
- * @param immediate 是否在触发事件后 在时间段n开始，立即执行，否则是时间段n结束，才执行
- * @returns 包装好的节流函数
- * @example debounce(fn, wait)
- * 
+ * @desc Debounce a function: execute wait ms after the last trigger, for input search, form validation, etc.
+ * @param {Function} fn function to debounce
+ * @param {number} wait delay in ms, default 300
+ * @param {boolean} immediate whether to invoke the first call immediately, default false
+ * @returns {ControlledFunction} debounced function, with a cancel method
+ * @example
+ * const search = debounce((kw) => request(kw), 500);
+ * input.addEventListener('input', (e) => search(e.target.value));
  */
-export function debounce(fn: Function, wait: number, immediate: boolean = false) {
-  let timer: any = null;
-  return function (this: unknown, ...args: any) {
+export function debounce<F extends (...args: any[]) => any>(
+  fn: F,
+  wait = 300,
+  immediate = false
+): ControlledFunction<F> {
+  let timer: ReturnType<typeof setTimeout> | null = null;
+
+  const debounced = function (this: unknown, ...args: Parameters<F>) {
     if (timer) {
       clearTimeout(timer);
       timer = null;
     }
     if (immediate) {
-      if (!timer) fn.apply(this, args);
-      timer = setTimeout(function () {//n 秒内 多次触发事件,重新计算.timeer 
-        timer = null;//n 秒内没有触发事件 timeer 设置为null，保证了n 秒后能重新触发事件 flag = true = !timmer  
-      }, wait)
+      const shouldCall = !timer;
+      timer = setTimeout(() => {
+        timer = null;
+      }, wait);
+      if (shouldCall) fn.apply(this, args);
     } else {
-      timer = setTimeout(() => { fn.apply(this, args) }, wait);
+      timer = setTimeout(() => {
+        timer = null;
+        fn.apply(this, args);
+      }, wait);
     }
   };
+
+  return Object.assign(debounced, {
+    cancel() {
+      if (timer) clearTimeout(timer);
+      timer = null;
+    },
+  });
 }
 
 /**
- * @func deepClone 
- * @param {object} obj 将要复制的对象
- * @param {string} hash  哈希值
- * @returns {object} 复制后的对象
- * @desc  深度复制对象
+ * @func deepClone
+ * @desc Deep-clone an object, supporting circular references, Date, RegExp, Map, Set, arrays, and Symbol keys
+ * @param {T} obj value to clone
+ * @param {WeakMap} hash internal cache; no need to pass manually
+ * @returns {T} cloned value
+ * @example const copy = deepClone({ a: { b: 1 } });
  */
+export function deepClone<T>(obj: T, hash: WeakMap<object, any> = new WeakMap()): T {
+  // Primitives and functions are returned directly
+  if (obj === null || typeof obj !== 'object') return obj;
 
-export const deepClone = (obj: object, hash: any = new WeakMap()): object => {
-  // 日期对象直接返回一个新的日期对象
-  if (obj instanceof Date) {
-    return new Date(obj);
+  // Date object
+  if (obj instanceof Date) return new Date(obj.getTime()) as unknown as T;
+  // RegExp object
+  if (obj instanceof RegExp) return new RegExp(obj.source, obj.flags) as unknown as T;
+
+  // Handle circular references
+  if (hash.has(obj as unknown as object)) return hash.get(obj as unknown as object);
+
+  // Map
+  if (obj instanceof Map) {
+    const mapClone = new Map();
+    hash.set(obj as unknown as object, mapClone);
+    obj.forEach((value, key) => {
+      mapClone.set(deepClone(key, hash), deepClone(value, hash));
+    });
+    return mapClone as unknown as T;
   }
-  //正则对象直接返回一个新的正则对象     
-  if (obj instanceof RegExp) {
-    return new RegExp(obj);
+
+  // Set
+  if (obj instanceof Set) {
+    const setClone = new Set();
+    hash.set(obj as unknown as object, setClone);
+    obj.forEach((value) => {
+      setClone.add(deepClone(value, hash));
+    });
+    return setClone as unknown as T;
   }
-  //如果循环引用,就用 weakMap 来解决
-  if (hash.has(obj)) {
-    return hash.get(obj);
-  }
-  // 获取对象所有自身属性的描述
-  let allDesc = Object.getOwnPropertyDescriptors(obj);
-  // 遍历传入参数所有键的特性
-  let cloneObj = Object.create(Object.getPrototypeOf(obj), allDesc)
-  hash.set(obj, cloneObj)
-  for (let key of Reflect.ownKeys(obj)) {
-    if (typeof obj[key] === 'object' && obj[key] !== null) {
-      cloneObj[key] = deepClone(obj[key], hash);
-    } else {
-      cloneObj[key] = obj[key];
+
+  // Array: must construct a real array; Object.create would only yield an array-like object
+  if (Array.isArray(obj)) {
+    const arrClone: any[] = new Array(obj.length);
+    hash.set(obj as unknown as object, arrClone);
+    for (let i = 0; i < obj.length; i++) {
+      arrClone[i] = deepClone(obj[i], hash);
     }
+    // Copy non-index properties attached to the array
+    for (const key of Reflect.ownKeys(obj)) {
+      if (key === 'length' || /^\d+$/.test(String(key))) continue;
+      (arrClone as any)[key] = deepClone((obj as any)[key], hash);
+    }
+    return arrClone as unknown as T;
   }
-  return cloneObj
-}
 
-/**
- * @func fetchUtil
- * @desc 封装fetch函数，用Promise做回调
- * @returns {Promise}
- * @type {{get: (function(*=)), post: (function(*=, *=))}}
- * @example fetchUtil.get(url)
- */
-export const fetchUtil = {
-  get: (url: string) => {
-    return new Promise((resolve, reject) => {
-      fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        }
-      }).then((response) => response.json()).then(response => {
-        resolve(response);
-      }).catch(err => {
-        reject(new Error(err));
-      });
-    });
-  },
-  post: (url: string, params: any) => {
-    return new Promise((resolve, reject) => {
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: params
-      }).then((response) => response.json()).then(response => {
-        resolve(response);
-      }).catch(err => {
-        reject(new Error(err));
-      });
-    });
+  // Plain object: preserve the prototype chain and property descriptors
+  const cloneObj = Object.create(
+    Object.getPrototypeOf(obj),
+    Object.getOwnPropertyDescriptors(obj)
+  );
+  hash.set(obj as unknown as object, cloneObj);
+
+  for (const key of Reflect.ownKeys(obj as object)) {
+    const value = (obj as any)[key];
+    cloneObj[key] = typeof value === 'object' && value !== null ? deepClone(value, hash) : value;
   }
-};
+  return cloneObj as T;
+}
 
 /**
  * @func getTypeOf
- * @param {unknown} param
- * @returns {string}
- * @desc 获取参数类型
- * @example getTypeOf(...)
- * String, Number, Boolean, Symbol, Null, Undefined, Object
- * Array, RegExp, Date, Error, Function, AsyncFunction, HTMLDocument
+ * @desc Get the precise type of a value (lowercase)
+ * @param {unknown} param value to check
+ * @returns {string} e.g. 'string' | 'number' | 'array' | 'date' | 'regexp' | 'null', etc.
+ * @example getTypeOf([]) // 'array'
+ * @example getTypeOf(null) // 'null'
  */
 export const getTypeOf = (param: unknown): string => {
-  const type = Object.prototype.toString.call(param).slice(8, -1);
-  return type.toLowerCase();
+  return Object.prototype.toString.call(param).slice(8, -1).toLowerCase();
 };
 
 /**
  * @func sleep
- * @param {number} wait
- * @returns {Promise}
- * @desc 睡眠函数
+ * @desc Sleep for a given number of milliseconds (async)
+ * @param {number} wait milliseconds
+ * @returns {Promise<void>}
+ * @example await sleep(1000);
  */
-export const sleep = async (wait: number) => new Promise(resolve => setTimeout(resolve, wait));
+export const sleep = async (wait: number): Promise<void> =>
+  new Promise((resolve) => setTimeout(resolve, wait));
 
 /**
- * @func importPluginByUrl
- * @desc 根据url引入插件模块
- * @param {string} cdnUrl
- * @param {string} pluginName  该插件对应的名称
- * @param {string} newName  重新定义的名称
- * @param {boolean} isEsm  是否是esm模块
- * @returns {Promise}
- * @example importPluginByUrl(cdnUrl, pluginName)
+ * @func fetchUtil
+ * @desc A minimal fetch-based request wrapper; serializes params to JSON automatically when it is an object
+ * @example fetchUtil.get('/api/list')
+ * @example fetchUtil.post('/api/add', { name: 'Tom' })
  */
-export function importPluginByUrl<T = any>(cdnUrl: string, pluginName: string, newName: string, isEsm: boolean = true): Promise<T> | void {
-  if (isEsm) {
-    // TODO: 若不支持 ESM 或者需要 polyfill 可以使用 SystemJS 等库
-    return import(cdnUrl as any)
-      .then((module) => {
-        window[newName] = module;
-        console.log(module);
-        return module;
-      });
-  } else {
-    return new Promise((resolve, reject) => {
-      const scriptList = Array.from(document.getElementsByTagName('script'));
-      const hasInject = window[pluginName] && scriptList.some(script => script.getAttribute('src') === cdnUrl)
-      if (hasInject) {
-        window[newName] = window[pluginName];
-        resolve(window[pluginName]?.default ?? window[pluginName]);
-      } else {
-        const script = document.createElement('script')
-        script.setAttribute('src', cdnUrl)
-        document.head.appendChild(script)
-        script.onload = () => {
-          window[newName] = window[pluginName];
-          resolve(window[pluginName]?.default ?? window[pluginName]);
-        }
-        script.onerror = () => {
-          reject(`加载${pluginName}失败`)
-        }
-      }
+export const fetchUtil = {
+  /**
+   * @desc Issue a GET request
+   * @param {string} url request URL
+   * @param {RequestInit} options extra fetch options
+   * @returns {Promise<any>} response data
+   */
+  get: (url: string, options: RequestInit = {}): Promise<any> =>
+    fetch(url, { method: 'GET', ...options }).then((response) => {
+      if (!response.ok) throw new Error(`HTTP ${response.status}: ${url}`);
+      return response.json();
+    }),
+
+  /**
+   * @desc Issue a POST request
+   * @param {string} url request URL
+   * @param {any} params request body; objects are auto-converted to JSON strings
+   * @param {RequestInit} options extra fetch options
+   * @returns {Promise<any>} response data
+   */
+  post: (url: string, params?: any, options: RequestInit = {}): Promise<any> => {
+    const isPlainBody =
+      typeof params === 'string' ||
+      params instanceof FormData ||
+      params instanceof Blob ||
+      params instanceof URLSearchParams;
+    return fetch(url, {
+      method: 'POST',
+      headers: isPlainBody ? {} : { 'Content-Type': 'application/json' },
+      body: isPlainBody ? params : JSON.stringify(params),
+      ...options,
+    }).then((response) => {
+      if (!response.ok) throw new Error(`HTTP ${response.status}: ${url}`);
+      return response.json();
     });
-  }
-}
+  },
+};

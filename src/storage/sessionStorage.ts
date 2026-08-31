@@ -1,40 +1,43 @@
+import { createStorage } from './base';
+
+const driver = createStorage(() => window.sessionStorage);
+
 /**
  * @func setSessionStorage
- * @param {string} key
- * @param {string} value
- * @returns {any}
- * @desc  设置sessionStorage
- * @example setSessionStorage('key', 'value');
+ * @desc Write a value into sessionStorage; supports any JSON-serializable data and an expiration time
+ * @param {string} key key name
+ * @param {any} value value
+ * @param {number} expire expiration time in milliseconds; omit to never expire
+ * @returns {void}
+ * @example setSessionStorage('step', 2);
  */
-export const setSessionStorage = (key: string, value: string) => {
-  if (!key) return;
-  if (typeof value !== 'string') {
-    value = JSON.stringify(value);
-  }
-  window.sessionStorage.setItem(key, value)
-};
+export const setSessionStorage = (key: string, value: any, expire?: number): void =>
+  driver.set(key, value, expire);
 
 /**
  * @func getSessionStorage
- * @param {string} key
- * @returns {any}
- * @desc  获取sessionStorage
- * @example getSessionStorage('key');
+ * @desc Read from sessionStorage; returns the default value when the key is missing or expired
+ * @param {string} key key name
+ * @param {any} defaultValue default value, defaults to null
+ * @returns {any} the stored value
+ * @example getSessionStorage('step', 1); // 2
  */
-export const getSessionStorage = (key: string): any => {
-  if (!key) return;
-  return window.sessionStorage.getItem(key)
-};
-
+export const getSessionStorage = <T = any>(key: string, defaultValue: T | null = null): T | null =>
+  driver.get<T>(key, defaultValue);
 
 /**
  * @func delSessionStorage
- * @param {string} key
- * @returns {any}
- * @desc  删除sessionStorage
- * @example delSessionStorage('key');
+ * @desc Remove the specified key from sessionStorage
+ * @param {string} key key name
+ * @returns {void}
+ * @example delSessionStorage('step');
  */
-export const delSessionStorage = (key: string) => {
-  if (!key) return;
-  window.sessionStorage.removeItem(key)
-};
+export const delSessionStorage = (key: string): void => driver.remove(key);
+
+/**
+ * @func clearSessionStorage
+ * @desc Clear all sessionStorage entries under the current domain
+ * @returns {void}
+ * @example clearSessionStorage();
+ */
+export const clearSessionStorage = (): void => driver.clear();

@@ -1,10 +1,10 @@
-// 整理常用的校验规则-扫地盲僧含泪整理转载署名-授权许可证
-// TODO:干到这里了
+// A collection of common validation rules – compiled and shared with attribution under license
+// TODO: work in progress
 /**
  * @func isChines
  * @param {string} str
  * @returns {boolean}
- * @desc 是否是中文
+ * @desc Check whether the string is Chinese
  */
 export const isChines = (str: string): boolean => {
   const reg = /^[\u4E00-\u9FA5]+$/;
@@ -13,15 +13,15 @@ export const isChines = (str: string): boolean => {
 
 /**
  * @func isCard
- * @param {string} str 身份证号
- * @param {number} type 1:15位，2:18位，默认0 同时匹配15位和18位
+ * @param {string} str ID card number
+ * @param {number} type 1: 15-digit, 2: 18-digit, default 0 matches both 15 and 18 digits
  * @returns {boolean}
- * @desc 是否为身份证号: 支持（1/2）代，15位或18位
+ * @desc Check whether it is an ID card number: supports 1st/2nd generation, 15 or 18 digits
  */
 export const isIdCard = (str: string, type: number = 0): boolean => {
-  // 1代身份证
+  // 1st-generation ID card
   const reg1 = /^[1-9]\d{7}(?:0\d|10|11|12)(?:0[1-9]|[1-2][\d]|30|31)\d{3}$/;
-  // 2代身份证
+  // 2nd-generation ID card
   const reg2 = /^[1-9]\d{5}(?:18|19|20)\d{2}(?:0[1-9]|10|11|12)(?:0[1-9]|[1-2]\d|30|31)\d{3}[\dXx]$/;
   const reg =
     /^\d{6}((((((19|20)\d{2})(0[13-9]|1[012])(0[1-9]|[12]\d|30))|(((19|20)\d{2})(0[13578]|1[02])31)|((19|20)\d{2})02(0[1-9]|1\d|2[0-8])|((((19|20)([13579][26]|[2468][048]|0[48]))|(2000))0229))\d{3})|((((\d{2})(0[13-9]|1[012])(0[1-9]|[12]\d|30))|((\d{2})(0[13578]|1[02])31)|((\d{2})02(0[1-9]|1\d|2[0-8]))|(([13579][26]|[2468][048]|0[048])0229))\d{2}))(\d|X|x)$/;
@@ -40,7 +40,7 @@ export const isIdCard = (str: string, type: number = 0): boolean => {
  * @func isPostCode
  * @param {number} value
  * @returns {boolean}
- * @desc 校验是否是大陆邮政编码
+ * @desc Validate whether it is a mainland China postal code
  */
 export const isPostCode = (value: number): boolean => {
   return /^[1-9][0-9]{5}$/.test(value.toString());
@@ -50,7 +50,7 @@ export const isPostCode = (value: number): boolean => {
  * @func isIPv6
  * @param {string} str
  * @returns {boolean}
- * @desc 校验是否是IPv6地址
+ * @desc Validate whether it is an IPv6 address
  */
 export const isIPv6 = (str: string): boolean => {
   return Boolean(str.match(/:/g) ? str.match(/:/g)!.length <= 7 : false && /::/.test(str) ? /^([\da-f]{1,4}(:|::)){1,6}[\da-f]{1,4}$/i.test(str) : /^([\da-f]{1,4}:){7}[\da-f]{1,4}$/i.test(str));
@@ -59,7 +59,7 @@ export const isIPv6 = (str: string): boolean => {
  * @func isEmail
  * @param {string} value
  * @returns {boolean}
- * @desc 是否是邮箱
+ * @desc Check whether it is an email
  */
 export const isEmail = (value: string): boolean => {
   const reg =
@@ -71,7 +71,7 @@ export const isEmail = (value: string): boolean => {
  * @func isTelNumber
  * @param {string} str
  * @returns {boolean}
- * @description 是否是手机号
+ * @description Check whether it is a mobile phone number
  */
 export const isTelNumber = (str: string): boolean => {
   const reg = /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[189]))\d{8}$/;
@@ -82,7 +82,7 @@ export const isTelNumber = (str: string): boolean => {
  * @func isHasEmoji
  * @param {string} value
  * @returns {boolean}
- * @description 是否包含emoji表情
+ * @description Check whether it contains emoji
  */
 export const isHasEmoji = (value: string): boolean => {
   value = String(value);
@@ -124,7 +124,7 @@ export const isHasEmoji = (value: string): boolean => {
  * @func isUrl
  * @param {string} str
  * @returns {boolean}
- * @desc 校验是否是URL
+ * @desc Validate whether it is a URL
  */
 export const isUrl = (str: string): boolean => {
   const reg = /^(((ht|f)tps?):\/\/)?([^!@#$%^&*?.\s-]([^!@#$%^&*?.\s]{0,63}[^!@#$%^&*?.\s])?\.)+[a-z]{2,6}\/?/;
@@ -133,11 +133,11 @@ export const isUrl = (str: string): boolean => {
 
 /**
  * @func isColor
- * @desc 判断字符串是否是十六进制的颜色值
- * @param {string} value 需要判断的数据
- * @returns {boolean} 校验是否是十六进制的颜色值
+ * @desc Check whether a string is a hex color value
+ * @param {string} value value to check
+ * @returns {boolean} whether it is a hex color value
  * @example if (isColor(str)) { doSomething }
  */
- export const isColor = function(value: string): boolean {
+export const isColor = function (value: string): boolean {
   return /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/.test(value);
-}
+};

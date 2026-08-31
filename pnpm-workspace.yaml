@@ -1,0 +1,17 @@
+# pnpm 工作区配置（单包仓库）
+#
+# 本机环境说明：
+#  - PNPM_HOME 指向 /opt/homebrew/bin（受保护目录），pnpm 默认会在那里写项目注册
+#    信息而失败，因此把 store 显式固定到项目内的 .pnpm-store，避免依赖 PNPM_HOME。
+#  - 默认的 isolated linker 会在 node_modules/.pnpm 下生成大量嵌套符号链接，在沙箱
+#    / 容器环境下会失败，因此统一使用 hoisted（扁平）链接模式。
+#
+# 如果你的环境 PNPM_HOME 可写、且支持符号链接，可以删除 storeDir 与 nodeLinker 两行。
+packages:
+  - '.'
+
+allowBuilds:
+  esbuild: true
+
+nodeLinker: hoisted
+storeDir: .pnpm-store
